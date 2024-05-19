@@ -69,10 +69,6 @@ autoplay = "default"
 [node name="StatsComponent" parent="." index="1"]
 health = 6
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
-position = Vector2(1.19209e-07, -0.5)
-scale = Vector2(0.6, 0.55)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
 shape = SubResource("CircleShape2D_ey76g")
 
@@ -80,7 +76,7 @@ shape = SubResource("CircleShape2D_ey76g")
 shape = SubResource("CircleShape2D_rtuqs")
 debug_color = Color(0.931539, 0.176313, 0.48917, 0.42)
 
-[node name="ScoreComponent" parent="." index="12"]
+[node name="ScoreComponent" parent="." index="11"]
 adjust_amount = 20
 
 [node name="States" type="Node" parent="." index="13"]

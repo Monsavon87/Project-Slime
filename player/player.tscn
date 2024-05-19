@@ -162,6 +162,7 @@ move_stats = SubResource("Resource_pyvak")
 script = ExtResource("4_m7via")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 0
 script = ExtResource("5_3aijn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -170,6 +171,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5yx5k")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 0
 script = ExtResource("6_t4fss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

@@ -29,8 +29,6 @@ script = ExtResource("1_f8aa8")
 script = ExtResource("2_bk77a")
 actor = NodePath("..")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
 [node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_vt4lu")
 sprite = NodePath("../AnimatedSprite2D")

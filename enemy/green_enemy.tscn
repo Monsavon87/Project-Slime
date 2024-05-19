@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi7jurtine08t"]
+[gd_scene load_steps=11 format=3 uid="uid://bi7jurtine08t"]
 
 [ext_resource type="PackedScene" uid="uid://qobigv3sd1u7" path="res://enemy/enemy.tscn" id="1_b23ty"]
+[ext_resource type="Script" path="res://enemy/green_enemy.gd" id="2_bq68p"]
 [ext_resource type="Texture2D" uid="uid://cijiex7w8etxg" path="res://assets/galaxy/green_enemy.png" id="2_g7677"]
+[ext_resource type="Script" path="res://components/Random_Move_Component.gd" id="3_uo37o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f551"]
 atlas = ExtResource("2_g7677")
@@ -39,6 +41,7 @@ radius = 8.0
 radius = 6.08276
 
 [node name="GreenEnemy" instance=ExtResource("1_b23ty")]
+script = ExtResource("2_bq68p")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fu4vx")
@@ -46,17 +49,14 @@ animation = &"move"
 autoplay = "move"
 
 [node name="StatsComponent" parent="." index="1"]
-health = 3
-
-[node name="MoveComponent" parent="." index="2"]
-velocity = Vector2(0, 40)
-
-[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
-position = Vector2(4.17233e-07, 0)
-scale = Vector2(0.8, 0.8)
+health = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
 shape = SubResource("CircleShape2D_612s5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
 shape = SubResource("CircleShape2D_lcp35")
+
+[node name="RandomMoveComponent" type="Node" parent="." index="13" node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_uo37o")
+move_component = NodePath("../MoveComponent")
