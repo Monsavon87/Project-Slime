@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cldatf842lhhj"]
+[gd_scene load_steps=29 format=3 uid="uid://cldatf842lhhj"]
 
 [ext_resource type="Texture2D" uid="uid://blkkgwawordvd" path="res://assets/Ninja Adventure - Asset Pack/Actor/Monsters/Slime/Slime.png" id="1_3h0s5"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="2_cf2ai"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://components/flash_component.gd" id="7_cdp53"]
 [ext_resource type="Script" path="res://components/destroyed_component.gd" id="8_j04fb"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="9_115p4"]
-[ext_resource type="Script" path="res://player/FollowCamera.gd" id="10_nmdug"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ee50g"]
 atlas = ExtResource("1_3h0s5")
@@ -131,9 +130,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5yx5k"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rx5el"]
+radius = 5.0
+height = 16.0
+
 [node name="Player" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_rd3pi")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
@@ -150,8 +158,18 @@ script = ExtResource("4_m7via")
 [node name="HurtboxComponent" type="Area2D" parent="."]
 script = ExtResource("5_3aijn")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5yx5k")
+
 [node name="HitboxComponent" type="Area2D" parent="."]
 script = ExtResource("6_t4fss")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rx5el")
 
 [node name="FlashComponent" type="Node" parent="."]
 script = ExtResource("7_cdp53")
@@ -161,6 +179,3 @@ script = ExtResource("8_j04fb")
 
 [node name="SpawnerComponent" type="Node2D" parent="."]
 script = ExtResource("9_115p4")
-
-[node name="FollowCamera" type="Camera2D" parent="."]
-script = ExtResource("10_nmdug")
