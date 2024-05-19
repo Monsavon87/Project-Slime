@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="8_sf3qm"]
 [ext_resource type="Script" path="res://components/hurt_component.gd" id="9_7c3uk"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="10_axq64"]
-[ext_resource type="PackedScene" uid="uid://cokyjxtb8m5sc" path="res://import/effects/explosion_effect.tscn" id="11_aomwk"]
+[ext_resource type="PackedScene" uid="uid://cokyjxtb8m5sc" path="res://effects/explosion_effect.tscn" id="11_aomwk"]
 [ext_resource type="Script" path="res://components/destroyed_component.gd" id="12_t7hml"]
 [ext_resource type="Script" path="res://components/score_component.gd" id="13_dcx1t"]
 [ext_resource type="Resource" uid="uid://ct3s2wwj5yvia" path="res://resource/game_stats.tres" id="14_o2xco"]
