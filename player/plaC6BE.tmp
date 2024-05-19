@@ -131,7 +131,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Resource" id="Resource_pyvak"]
+[sub_resource type="Resource" id="Resource_1mu3v"]
 script = ExtResource("4_roga0")
 speed = 100
 
@@ -156,7 +156,7 @@ actor = NodePath("..")
 [node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
 script = ExtResource("3_t40vv")
 move_component = NodePath("../MoveComponent")
-move_stats = SubResource("Resource_pyvak")
+move_stats = SubResource("Resource_1mu3v")
 
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("4_m7via")
