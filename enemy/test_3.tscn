@@ -1,21 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca47r7ecyly71"]
+[gd_scene load_steps=6 format=3 uid="uid://ca47r7ecyly71"]
 
 [ext_resource type="PackedScene" uid="uid://qobigv3sd1u7" path="res://enemy/enemy.tscn" id="1_edr8l"]
 [ext_resource type="Script" path="res://components/StateMachine.gd" id="2_33fhh"]
-[ext_resource type="Texture2D" uid="uid://btrq8e0kyxthg" path="res://addons/beehave/icons/action.svg" id="2_e0myp"]
 [ext_resource type="Script" path="res://enemy/EnemyChase.gd" id="4_4nmdu"]
 [ext_resource type="Script" path="res://enemy/EnemyWander.gd" id="4_uicyg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v2tkk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_e0myp")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="test3" instance=ExtResource("1_edr8l")]
 
