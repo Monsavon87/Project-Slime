@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://cv3kkxfx0dkgt"]
+[gd_scene load_steps=25 format=3 uid="uid://cv3kkxfx0dkgt"]
 
 [ext_resource type="PackedScene" uid="uid://qobigv3sd1u7" path="res://enemy/enemy.tscn" id="1_7yk15"]
 [ext_resource type="Texture2D" uid="uid://dc8bb462ooo" path="res://assets/Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue/SeparateAnim/Walk.png" id="2_d8ade"]
 [ext_resource type="Script" path="res://enemy/ninja.gd" id="2_n0wyj"]
+[ext_resource type="Script" path="res://components/timed_state_componoent.gd" id="3_aqlg3"]
+[ext_resource type="Script" path="res://components/randommovecomponent2.gd" id="5_bby0i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0tu2"]
 atlas = ExtResource("2_d8ade")
@@ -132,8 +134,6 @@ radius = 9.0
 
 [node name="ninja" instance=ExtResource("1_7yk15")]
 script = ExtResource("2_n0wyj")
-min_speed = 50.0
-max_speed = 100.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_m83yb")
@@ -143,3 +143,24 @@ shape = SubResource("CircleShape2D_iquu3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
 shape = SubResource("CircleShape2D_ejqr6")
+
+[node name="states" type="Node" parent="." index="13"]
+unique_name_in_owner = true
+
+[node name="IdleState" type="Node" parent="states" index="0"]
+unique_name_in_owner = true
+script = ExtResource("3_aqlg3")
+duration = 2.0
+
+[node name="WanderState" type="Node" parent="states" index="1"]
+unique_name_in_owner = true
+script = ExtResource("3_aqlg3")
+duration = 2.0
+
+[node name="RandomMoveTimedComponent" type="Node" parent="states/WanderState" index="0" node_paths=PackedStringArray("move_component")]
+script = ExtResource("5_bby0i")
+min_duration = 1.0
+max_duration = 3.0
+min_speed = 10.0
+max_speed = 30.0
+move_component = NodePath("../../../MoveComponent")

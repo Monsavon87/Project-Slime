@@ -6,3 +6,7 @@ extends Node
 
 func _process(delta: float) -> void:
 	actor.translate(velocity * delta)
+	
+#func _physics_process(delta: float) -> void:
+	#actor.move_and_slide
+	

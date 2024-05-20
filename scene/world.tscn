@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://84kdml16v5s4" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_gdgwx"]
 [ext_resource type="Texture2D" uid="uid://cte87l6r1h67j" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="2_y78xe"]
 [ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://player/player.tscn" id="3_f27ir"]
-[ext_resource type="PackedScene" uid="uid://bi7jurtine08t" path="res://enemy/green_enemy.tscn" id="4_ihcxf"]
+[ext_resource type="PackedScene" uid="uid://ca47r7ecyly71" path="res://enemy/test_3.tscn" id="8_lhi05"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bhi3x"]
 texture = ExtResource("1_gdgwx")
@@ -868,5 +868,5 @@ position = Vector2(42, 37)
 collision_layer = 0
 collision_mask = 0
 
-[node name="GreenEnemy" parent="." instance=ExtResource("4_ihcxf")]
-position = Vector2(133, 50)
+[node name="test3" parent="." instance=ExtResource("8_lhi05")]
+position = Vector2(189, 263)

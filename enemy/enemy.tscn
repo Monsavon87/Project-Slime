@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://d1mka03s6iwnv" path="res://sounds/hit_sound.wav" id="15_m48bq"]
 [ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="16_4gt1k"]
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=["Enemy"]]
 script = ExtResource("1_4egu7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -69,9 +69,8 @@ destroy_effect_spawner_component = NodePath("../SpawnerComponent")
 script = ExtResource("13_dcx1t")
 game_stats = ExtResource("14_o2xco")
 
-[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["Enemy"]]
 stream = ExtResource("15_m48bq")
 volume_db = 5.0
 bus = &"Sounds"
 script = ExtResource("16_4gt1k")
-auto_play_with_variance = true
