@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu6kke4pqoump"]
+[gd_scene load_steps=3 format=3 uid="uid://cu6kke4pqoump"]
 
-[ext_resource type="PackedScene" uid="uid://cv3kkxfx0dkgt" path="res://enemy/ninja.tscn" id="1_ooqdy"]
+[ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://player/player.tscn" id="1_6myg4"]
+[ext_resource type="PackedScene" uid="uid://ca47r7ecyly71" path="res://enemy/test_3.tscn" id="2_dxa8s"]
 
 [node name="TestScene" type="Node2D"]
 
-[node name="ninja" parent="." instance=ExtResource("1_ooqdy")]
-position = Vector2(125, 78)
+[node name="Player" parent="." instance=ExtResource("1_6myg4")]
+
+[node name="test3" parent="." instance=ExtResource("2_dxa8s")]
+position = Vector2(173, 121)
