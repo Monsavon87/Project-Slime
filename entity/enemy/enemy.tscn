@@ -1,0 +1,76 @@
+[gd_scene load_steps=17 format=3 uid="uid://qobigv3sd1u7"]
+
+[ext_resource type="Script" path="res://entity/enemy/enemy.gd" id="1_4egu7"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="1_f8aa8"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_bk77a"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="3_vt4lu"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="4_0i02w"]
+[ext_resource type="Script" path="res://components/shake_component.gd" id="5_kvits"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="7_tda7m"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="8_sf3qm"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="9_7c3uk"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="10_axq64"]
+[ext_resource type="PackedScene" uid="uid://cokyjxtb8m5sc" path="res://effects/explosion_effect.tscn" id="11_aomwk"]
+[ext_resource type="Script" path="res://components/destroyed_component.gd" id="12_t7hml"]
+[ext_resource type="Script" path="res://components/score_component.gd" id="13_dcx1t"]
+[ext_resource type="Resource" uid="uid://ct3s2wwj5yvia" path="res://Resources/game_stats.tres" id="14_o2xco"]
+[ext_resource type="AudioStream" uid="uid://d1mka03s6iwnv" path="res://sounds/hit_sound.wav" id="15_m48bq"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="16_4gt1k"]
+
+[node name="Enemy" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_4egu7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("1_f8aa8")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_bk77a")
+actor = NodePath("..")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_vt4lu")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_0i02w")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("5_kvits")
+node = NodePath("../AnimatedSprite2D")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_tda7m")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("8_sf3qm")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("9_7c3uk")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("10_axq64")
+scene = ExtResource("11_aomwk")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("12_t7hml")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../SpawnerComponent")
+
+[node name="ScoreComponent" type="Node" parent="."]
+script = ExtResource("13_dcx1t")
+game_stats = ExtResource("14_o2xco")
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["Enemy"]]
+stream = ExtResource("15_m48bq")
+volume_db = 5.0
+bus = &"Sounds"
+script = ExtResource("16_4gt1k")

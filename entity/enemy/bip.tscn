@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://biagvoa707qhp"]
+
+[ext_resource type="Script" path="res://entity/enemy/bip.gd" id="1_x5vev"]
+[ext_resource type="Texture2D" uid="uid://bj0nex3vjtpln" path="res://assets/icon.svg" id="2_3gf8o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwo03"]
+size = Vector2(13.3284, 6.48233)
+
+[node name="bip" type="CharacterBody2D"]
+z_index = 1
+scale = Vector2(1.50221, 2.27423)
+script = ExtResource("1_x5vev")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.118499, 0.0657423)
+texture = ExtResource("2_3gf8o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xwo03")
+
+[node name="navigation" type="Node" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Node2D"]
+
+[node name="Timer" type="Timer" parent="Node2D"]
+wait_time = 0.5
+
+[connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu6kke4pqoump"]
+
+[ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://entity/player/player.tscn" id="1_6myg4"]
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/bip.tscn" id="2_30ds0"]
+[ext_resource type="PackedScene" uid="uid://bb0d6lmieyoah" path="res://entity/enemy/area_2d.tscn" id="3_wsc32"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_uik6s"]
+vertices = PackedVector2Array(700, 63, 668, 438, 48, 442, 40, 43)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(30, 33, 39, 453, 678, 448, 711, 54)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="TestScene" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_uik6s")
+
+[node name="Player" parent="." instance=ExtResource("1_6myg4")]
+position = Vector2(133, 107)
+
+[node name="bip" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_30ds0")]
+position = Vector2(381, 254)
+target = NodePath("../Player")
+
+[node name="Area2D" parent="." instance=ExtResource("3_wsc32")]
+position = Vector2(613, 375)
+scale = Vector2(1.50221, 2.27423)

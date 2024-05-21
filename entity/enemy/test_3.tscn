@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca47r7ecyly71"]
+
+[ext_resource type="PackedScene" uid="uid://qobigv3sd1u7" path="res://entity/enemy/enemy.tscn" id="1_edr8l"]
+[ext_resource type="Script" path="res://components/StateMachine.gd" id="2_33fhh"]
+[ext_resource type="Script" path="res://entity/enemy/EnemyChase.gd" id="4_4nmdu"]
+[ext_resource type="Script" path="res://entity/enemy/EnemyWander.gd" id="4_uicyg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2tkk"]
+
+[node name="test3" instance=ExtResource("1_edr8l")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, 2)
+scale = Vector2(5.49107, 3.18092)
+sprite_frames = SubResource("SpriteFrames_v2tkk")
+
+[node name="StateMachine" type="Node" parent="." index="13" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_33fhh")
+initial_state = NodePath("Wander")
+
+[node name="Chase" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy", "move_component")]
+script = ExtResource("4_4nmdu")
+enemy = NodePath("../..")
+move_component = NodePath("../../MoveComponent")
+
+[node name="Wander" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("move_component", "enemy")]
+script = ExtResource("4_uicyg")
+min_duration = 1.0
+max_duration = 2.0
+min_speed = 5.0
+max_speed = 20.0
+move_component = NodePath("../../MoveComponent")
+enemy = NodePath("../..")

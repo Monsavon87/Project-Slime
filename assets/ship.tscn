@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://hrhuiah70nvu" path="res://assets/ship_move_stats.tres" id="5_73fnw"]
 [ext_resource type="Script" path="res://components/position_clamp_component.gd" id="6_ekia4"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="7_befrr"]
-[ext_resource type="PackedScene" uid="uid://cvy2hp1033cjk" path="res://projectile/laser.tscn" id="8_d8k3a"]
+[ext_resource type="PackedScene" uid="uid://cvy2hp1033cjk" path="res://entity/projectile/laser.tscn" id="8_d8k3a"]
 [ext_resource type="Script" path="res://components/scale_component.gd" id="9_6wqki"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="11_ivc8k"]
 [ext_resource type="Script" path="res://components/stats_component.gd" id="12_m5w87"]
