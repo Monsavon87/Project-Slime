@@ -9,17 +9,27 @@ class_name EnemyIdleState
 # Variables membres
 var duration : float
 
-
+func _ready() -> void:
+	set_physics_process(false)
 
 # Called when the node enters the scene tree for the first time.
 func enter():
 	print("i wait")
-	# set movement to zero
-	move_component.velocity = Vector2.ZERO
-	# Générer une durée aléatoire pour le mouvement
+	set_physics_process(true)
 	duration = randf_range(min_duration, max_duration)
-	await get_tree().create_timer(duration)
+	get_tree().create_timer(duration)
+	await SceneTreeTimer
 	Transitioned.emit(self, "Wander")
 	print("i waited")
 	
+	
+	
+func physics_update(_delta: float):
+	# set movement to zero
+	move_component.velocity = Vector2.ZERO
+	# Générer une durée aléatoire pour le mouvement
+	
+	
+func exit():
+	set_physics_process(false)
 	

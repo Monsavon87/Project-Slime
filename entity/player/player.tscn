@@ -147,6 +147,8 @@ height = 16.0
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+wall_min_slide_angle = 0.0349066
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)

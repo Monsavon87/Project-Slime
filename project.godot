@@ -93,6 +93,16 @@ ui_down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="PlayerProjectil"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="EnemyProjectil"
+2d_physics/layer_6="Modifier"
+2d_physics/layer_7="Collectable"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -1,27 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://cu6kke4pqoump"]
 
-[ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://entity/player/player.tscn" id="1_6myg4"]
+[ext_resource type="Script" path="res://Gameplay/Levels/level.gd" id="1_kwu0m"]
 [ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/bip.tscn" id="2_30ds0"]
-[ext_resource type="PackedScene" uid="uid://bb0d6lmieyoah" path="res://entity/enemy/area_2d.tscn" id="3_wsc32"]
+[ext_resource type="PackedScene" uid="uid://b8ldxowcludm" path="res://Gameplay/player.tscn" id="4_d8jsr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_uik6s"]
-vertices = PackedVector2Array(700, 63, 668, 438, 48, 442, 40, 43)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(30, 33, 39, 453, 678, 448, 711, 54)])
+vertices = PackedVector2Array(40, 43, 700, 63, 237, 107, 163, 99, 546, 311, 668, 438, 519, 395, 278, 272, 194, 308, 260, 359, 48, 442, 150, 284)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(2, 1, 4, 7), PackedInt32Array(8, 2, 7, 9), PackedInt32Array(6, 5, 10, 9), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(10, 0, 3, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(30, 33, 39, 453, 678, 448, 711, 54), PackedVector2Array(160, 278, 172, 110, 225, 116, 187, 293), PackedVector2Array(286, 283, 533, 319, 512, 384, 272, 351)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="TestScene" type="Node2D"]
+[node name="TestScene" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_kwu0m")
+player = NodePath("Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_uik6s")
 
-[node name="Player" parent="." instance=ExtResource("1_6myg4")]
-position = Vector2(133, 107)
-
-[node name="bip" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_30ds0")]
+[node name="bip" parent="." instance=ExtResource("2_30ds0")]
 position = Vector2(381, 254)
-target = NodePath("../Player")
 
-[node name="Area2D" parent="." instance=ExtResource("3_wsc32")]
-position = Vector2(613, 375)
-scale = Vector2(1.50221, 2.27423)
+[node name="Player" parent="." instance=ExtResource("4_d8jsr")]
+
+[editable path="bip"]
