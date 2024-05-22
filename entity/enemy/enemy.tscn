@@ -72,5 +72,4 @@ game_stats = ExtResource("14_o2xco")
 [node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["Enemy"]]
 stream = ExtResource("15_m48bq")
 volume_db = 5.0
-bus = &"Sounds"
 script = ExtResource("16_4gt1k")
