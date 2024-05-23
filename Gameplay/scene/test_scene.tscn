@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cu6kke4pqoump"]
 
 [ext_resource type="Script" path="res://Gameplay/Levels/level.gd" id="1_kwu0m"]
-[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/bip.tscn" id="2_30ds0"]
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="2_55tdi"]
 [ext_resource type="PackedScene" uid="uid://b8ldxowcludm" path="res://Gameplay/player.tscn" id="4_d8jsr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_uik6s"]
@@ -17,9 +17,7 @@ player = NodePath("Player")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_uik6s")
 
-[node name="bip" parent="." instance=ExtResource("2_30ds0")]
-position = Vector2(381, 254)
-
 [node name="Player" parent="." instance=ExtResource("4_d8jsr")]
 
-[editable path="bip"]
+[node name="EnemyBase" parent="." instance=ExtResource("2_55tdi")]
+position = Vector2(488, 243)

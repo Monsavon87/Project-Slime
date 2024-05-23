@@ -1,0 +1,327 @@
+[gd_scene load_steps=17 format=3 uid="uid://qobigv3sd1u7"]
+
+[ext_resource type="Script" path="res://entity/enemy/enemy_old.gd" id="1_hncac"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="9_mvcsv"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="10_jy22j"]
+[ext_resource type="PackedScene" uid="uid://cokyjxtb8m5sc" path="res://effects/explosion_effect.tscn" id="11_e46ur"]
+[ext_resource type="Resource" uid="uid://ct3s2wwj5yvia" path="res://Resources/game_stats.tres" id="14_cv2h1"]
+[ext_resource type="AudioStream" uid="uid://d1mka03s6iwnv" path="res://sounds/hit_sound.wav" id="15_ri7ct"]
+
+[sub_resource type="GDScript" id="GDScript_th68b"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name StatsComponent
+extends Node
+
+# Create the health variable and connect a setter
+@export var health: int = 1:
+	set(value):
+		health = value
+		
+		# Signal out that the health has changed
+		health_changed.emit()
+		
+		# Signal out when health is at 0
+		if health == 0: no_health.emit()
+
+# Create our signals for health
+signal health_changed() # Emit when the health value has changed
+signal no_health() # Emit when there is no health left
+"
+
+[sub_resource type="GDScript" id="GDScript_nk0fd"]
+script/source = "class_name MoveComponent
+extends Node
+
+@export var actor: Node2D
+@export var velocity: Vector2
+
+func _process(delta: float) -> void:
+	actor.translate(velocity * delta)
+	
+#func _physics_process(delta: float) -> void:
+	#actor.move_and_slide
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_tu44u"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name ScaleComponent
+extends Node
+
+# Export the sprite that this component will be scaling
+@export var sprite: Node2D
+
+# Export the scale amount (as a vector)
+@export var scale_amount = Vector2(1.5, 1.5)
+
+# Export the scale duration
+@export var scale_duration: = 0.4
+
+# This is the function that will activate this component
+func tween_scale() -> void:
+	# We are going to scale the sprite using a tween (so we can make is smooth)
+	# First we create the tween and set it's transition type and easing type
+	var tween = create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	
+	# Next we scale the sprite from its current scale to the scale amount (in 1/10th of the scale duration)
+	tween.tween_property(sprite, \"scale\", scale_amount, scale_duration * 0.1).from_current()
+	# Finally we scale back to a value of 1 for the other 9/10ths of the scale duration
+	# Consider that we always scale back to a value of 1, you could store the starting scale amount for the sprite
+	# as well for games where your character doesn't start with a scale of 1
+	tween.tween_property(sprite, \"scale\", Vector2.ONE, scale_duration * 0.9).from(scale_amount)
+"
+
+[sub_resource type="GDScript" id="GDScript_31nsm"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name FlashComponent
+extends Node
+
+# The flash component uses a flash material. I chose to preload this into a constant
+# But you could also export a material instead to allow the component to use a variety
+# of different materials
+const FLASH_MATERIAL = preload(\"res://effects/white_flash_material.tres\")
+
+# Export the sprite this compononet will be flashing
+@export var sprite: CanvasItem
+
+# Export a duration for the flash
+@export var flash_duration: = 0.2
+
+# We need to store the original sprite's material so we can reset it after the flash
+var original_sprite_material: Material
+
+# Create a timer for the flash component to use
+var timer: Timer = Timer.new()
+
+func _ready() -> void:
+	# We have to add the timer as a child of this component in order to use it
+	add_child(timer)
+	
+	# Store the original sprite material
+	original_sprite_material = sprite.material
+
+# This is the function we can use to activate this component
+func flash():
+	# Set the sprite's material to the flash material
+	sprite.material = FLASH_MATERIAL
+	
+	# Start the timer (passing in the flash duration)
+	timer.start(flash_duration)
+	
+	# Wait until the timer times out
+	await timer.timeout
+	
+	# Set the sprite's material back to the original material that we stored
+	sprite.material = original_sprite_material
+"
+
+[sub_resource type="GDScript" id="GDScript_ywwub"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name ShakeComponent
+extends Node
+
+# You should shake the sprite and not the root node or you'll get unexpected behavior
+# since we are manipulating the position of the node and moving it to 0,0
+
+# Export the node that this component will be shaking
+@export var node: Node2D
+
+# Export the shake amount
+@export var shake_amount: = 2.0
+
+# Export the shake duration
+@export var shake_duration: = 0.4
+
+# Store the current amount we are shaking the node (this value will decrease over time)
+var shake = 0
+
+# This is the function that activates this component
+func tween_shake():
+	# Set the shake to the shake amount (shake is the value used in the process function to
+	# shake the node)
+	shake = shake_amount
+	
+	# Create a tween
+	var tween = create_tween()
+	
+	# Tween the shake value from current down to 0 over the shake duration
+	tween.tween_property(self, \"shake\", 0.0, shake_duration).from_current()
+
+func _physics_process(delta: float) -> void:
+	# Manipulate the position of the node by the shake amount every physics frame
+	# Use randf_range to pick a random x and y value using the shake value
+	node.position = node.position + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
+"
+
+[sub_resource type="GDScript" id="GDScript_uf35c"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name HurtboxComponent
+extends Area2D
+
+# Create the is_invincible boolean
+var is_invincible = false :
+	# Here we create an inline setter so we can disable and enable collision shapes on
+	# the hurtbox when is_invincible is changed.
+	set(value):
+		is_invincible = value
+		# Disable any collisions shapes on this hurtbox when it is invincible
+		# And reenable them when it isn't invincible
+		for child in get_children():
+			if not child is CollisionShape2D and not child is CollisionPolygon2D: continue
+			# Use call deferred to make sure this doesn't happen in the middle of the
+			# physics process
+			child.set_deferred(\"disabled\", is_invincible)
+
+# Create a signal for when this hurtbox is hit by a hitbox
+signal hurt(hitbox)
+"
+
+[sub_resource type="GDScript" id="GDScript_gebc4"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name HitboxComponent
+extends Area2D
+
+# Export the damage amount this hitbox deals
+@export var damage = 1.0
+
+# Create a signal for when the hitbox hits a hurtbox
+signal hit_hurtbox(hurtbox)
+
+func _ready():
+	# Connect on area entered to our hurtbox entered function
+	area_entered.connect(_on_hurtbox_entered)
+
+func _on_hurtbox_entered(hurtbox: HurtboxComponent):
+	# Make sure the area we are overlapping is a hurtbox
+	if not hurtbox is HurtboxComponent: return
+	# Make sure the hurtbox isn't invincible
+	if hurtbox.is_invincible: return
+	# Signal out that we hit a hurtbox (this is useful for destroying projectiles when they hit something)
+	hit_hurtbox.emit(hurtbox)
+	# Have the hurtbox signal out that it was hit
+	hurtbox.hurt.emit(self)
+"
+
+[sub_resource type="GDScript" id="GDScript_w516c"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name DestroyedComponent
+extends Node
+
+# Export the actor this component will operate on
+@export var actor: Node2D
+
+# Grab access to the stats so we can tell when the health has reached zero
+@export var stats_component: StatsComponent
+
+# Export and grab access to a spawner component so we can create an effect on death
+@export var destroy_effect_spawner_component: SpawnerComponent
+
+func _ready() -> void:
+	# Connect the the no health signal on our stats to the destroy function
+	stats_component.no_health.connect(destroy)
+
+func destroy() -> void:
+	# create an effect (from the spawner component) and free the actor
+	destroy_effect_spawner_component.spawn(actor.global_position)
+	actor.queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_xffyh"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name ScoreComponent
+extends Node
+
+# Export the game stats so we can manipulate the game score
+@export var game_stats: GameStats
+
+# Export the amount the score should be adjusted
+@export var adjust_amount = 5
+
+# This is the function that we call to activate this component. By default it will
+# Use the adjust_amount when called but we could optionally pass in a different amount.
+func adjust_score(amount: int = adjust_amount):
+	game_stats.score += amount
+"
+
+[sub_resource type="GDScript" id="GDScript_u52x4"]
+script/source = "# Give the component a class name so it can be instanced as a custom node
+class_name VariablePitchAudioStreamPlayer
+extends AudioStreamPlayer
+
+# This custom node is used to easily play a sound with a variable pitch
+
+# Export the minimum and maximum pitch amounts
+@export var pitch_min = 0.6
+@export var pitch_max = 1.2
+
+# Allow the node to automatically play the sound with the pitch variance
+@export var auto_play_with_variance: = false
+
+func _ready() -> void:
+	# If auto play with variance is on, call the function to play the sound in the ready function
+	if auto_play_with_variance:
+		play_with_variance(0.0)
+
+# This is the function for playing the sound using a variance in the pitch
+func play_with_variance(from_position: float = 0.0) -> void:
+	# Set the pitch scale before playing the sound (picking a random amount between the minimum and maximum)
+	pitch_scale = randf_range(pitch_min, pitch_max)
+	play(from_position)
+"
+
+[node name="EnemyOld" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_hncac")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="StatsComponent" type="Node" parent="."]
+script = SubResource("GDScript_th68b")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = SubResource("GDScript_nk0fd")
+actor = NodePath("..")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = SubResource("GDScript_tu44u")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = SubResource("GDScript_31nsm")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = SubResource("GDScript_ywwub")
+node = NodePath("../AnimatedSprite2D")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = SubResource("GDScript_uf35c")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+script = SubResource("GDScript_gebc4")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("9_mvcsv")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("10_jy22j")
+scene = ExtResource("11_e46ur")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = SubResource("GDScript_w516c")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../SpawnerComponent")
+
+[node name="ScoreComponent" type="Node" parent="."]
+script = SubResource("GDScript_xffyh")
+game_stats = ExtResource("14_cv2h1")
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["Enemy"]]
+stream = ExtResource("15_ri7ct")
+volume_db = 5.0
+script = SubResource("GDScript_u52x4")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjuvabrvvpovu"]
+
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="1_8cmip"]
+
+[node name="bop" instance=ExtResource("1_8cmip")]
+aggro_distance = 50

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Gameplay/Levels/level.gd" id="1_nk73a"]
 [ext_resource type="PackedScene" uid="uid://b8ldxowcludm" path="res://Gameplay/player.tscn" id="2_pgpya"]
 [ext_resource type="PackedScene" uid="uid://b0o33vveq8wx5" path="res://Gameplay/door.tscn" id="3_40px8"]
-[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/bip.tscn" id="5_vtgdp"]
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="5_vtgdp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h0ua8"]
 texture = ExtResource("1_6uaoh")

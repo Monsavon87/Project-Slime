@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c0t7wmcihtaca" path="res://assets/sprites/tilesets/walls/wooden_door_b.png" id="7_b4867"]
 [ext_resource type="Texture2D" uid="uid://but37xksryxpx" path="res://assets/sprites/tilesets/floors/wooden.png" id="8_tx5hb"]
 [ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://entity/player/player.tscn" id="9_3o4ub"]
-[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/bip.tscn" id="10_xyj4l"]
-[ext_resource type="PackedScene" uid="uid://bb0d6lmieyoah" path="res://entity/enemy/area_2d.tscn" id="11_0pu21"]
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="10_xyj4l"]
+[ext_resource type="PackedScene" path="res://entity/enemy/area_2d.tscn" id="11_0pu21"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0f2wf"]
 vertices = PackedVector2Array(859, 29, 876, 458, 37, 460, 20, 26)
