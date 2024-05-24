@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://entity/enemy/enemy_base.gd" id="1_l0kh0"]
 [ext_resource type="Texture2D" uid="uid://bj0nex3vjtpln" path="res://assets/icon.svg" id="2_840nr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwo03"]
-size = Vector2(13.3284, 6.48233)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31ax4"]
+radius = 7.0
+height = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyhhv"]
 
@@ -26,7 +27,7 @@ scale = Vector2(0.118499, 0.0657423)
 texture = ExtResource("2_840nr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xwo03")
+shape = SubResource("CapsuleShape2D_31ax4")
 
 [node name="ChasingAI" type="Node2D" parent="."]
 

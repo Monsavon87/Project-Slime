@@ -80,7 +80,7 @@ func setup_navserver ():
 	var region = NavigationServer2D.region_create()
 	NavigationServer2D.region_set_transform(region, Transform2D())
 	NavigationServer2D.region_set_map(region, map)
-	
+	NavigationServer2D.map_set_cell_size(map, 1)
 	#set navigation mesh for the region
 	var navigation_poly = NavigationMesh.new()
 	navigation_poly = navReg.navigation_polygon

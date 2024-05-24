@@ -105,6 +105,10 @@ ui_down={
 2d_physics/layer_6="Modifier"
 2d_physics/layer_7="Collectable"
 
+[navigation]
+
+3d/default_cell_size=1.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
