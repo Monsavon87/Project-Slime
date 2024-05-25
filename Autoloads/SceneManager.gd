@@ -239,7 +239,7 @@ func _on_content_finished_loading(incoming_scene) -> void:
 	if incoming_scene.has_method("init_scene"): 
 		incoming_scene.init_scene()
 	
-	# probably not necssary since we split our _content_finished_loading but it won't hurt to have an extra check
+	# probably not necessary since we split our _content_finished_loading but it won't hurt to have an extra check
 	if _loading_screen != null:
 		_loading_screen.finish_transition()
 		

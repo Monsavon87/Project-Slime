@@ -10,7 +10,7 @@ signal player_entered_door(door:Door,transition_type:String)
 @export_enum("north","east","south","west") var entry_direction	## direction we're moving when entering door, defines zelda transition direction as well as direction we push the player. Will only ever be Vector2.UP/RIGHT/DOWN/LEFT
 @export_enum("fade_to_black","fade_to_white","wipe_to_right","zelda","no_transition") var transition_type:String ## transitoin we want to use when moving through the door
 @export var push_distance:int = 16	## how far into the room the player should be pushed upon entry
-@export var path_to_new_scene:String	## scene we want to load when touchign this door
+@export var path_to_new_scene:String	## scene we want to load when touching this door
 @export var entry_door_name:String	## name of the door we're entering through in the next room
 
 func _on_body_entered(body: Node2D) -> void:
@@ -22,8 +22,9 @@ func _on_body_entered(body: Node2D) -> void:
 	# So I should probably have Gameplay listen for a signal from the doors requesting a level change
 	# and then handle the SceneManager request from Gameplay. But this also works and it's simpler
 	# so it's fine at this scale. Sometimes "it just works" is enough - pick your battles <3
+	var unload = get_parent() 
 	var gameplay_node:Gameplay = get_tree().get_nodes_in_group("gameplay")[0] as Gameplay
-	var unload:Node = gameplay_node.current_level	# we're now responsible for tracking this 
+	#var unload:Level = gameplay_node.current_level	# we're now responsible for tracking this 
 	
 	if transition_type == "zelda":
 		SceneManager.swap_scenes_zelda(path_to_new_scene, gameplay_node.level_holder, unload, body.move_dir)

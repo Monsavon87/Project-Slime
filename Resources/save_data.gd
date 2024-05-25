@@ -7,7 +7,7 @@ enum LEVEL_STATUS{
 	COMPLETED
 }
 
-# This class should be customized to include dava validation and helper functions that are specific to 
+# This class should be customized to include data validation and helper functions that are specific to 
 # the data you want save/access/validate - leaving the JSONLoader class generic and responsible for
 # simply reading and writing whatever data is manipulated here. Everything here is intended to be
 # deleted and replaced by logic that suits your game's loading/saving needs

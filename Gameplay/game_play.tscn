@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Gameplay/game_play.gd" id="1_2q6wv"]
 [ext_resource type="PackedScene" uid="uid://cu6kke4pqoump" path="res://Gameplay/scene/test_scene.tscn" id="2_bxcx5"]
 
-[node name="gameplay" type="Node2D" groups=["gameplay"]]
+[node name="gameplay" type="Node2D" groups=["Gameplay", "gameplay"]]
 script = ExtResource("1_2q6wv")
 
-[node name="LevelHolder" type="Node2D" parent="."]
+[node name="LevelHolder" type="Node2D" parent="." groups=["Gameplay", "gameplay"]]
 
 [node name="TestScene" parent="LevelHolder" instance=ExtResource("2_bxcx5")]

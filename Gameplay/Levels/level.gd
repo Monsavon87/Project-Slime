@@ -69,7 +69,7 @@ func start_scene() -> void:
 ## put player in front of the correct door, facing the correct direction
 func init_player_location() -> void:
 	player.visible = true
-#	var doors = find_children("*","Door")
+	#var doors = find_children("*","Door")
 	if data != null:
 		for door in doors:
 			if door.name == data.entry_door_name:
