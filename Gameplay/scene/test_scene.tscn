@@ -746,3 +746,24 @@ position = Vector2(488, 243)
 aggro_distance = 100
 deaggro_distance = 200
 navReg = NodePath("../Navigation")
+
+[node name="EnemyBase2" parent="." node_paths=PackedStringArray("nav_agent", "navReg") instance=ExtResource("2_55tdi")]
+position = Vector2(818, 134)
+nav_agent = NodePath("../EnemyBase/ChasingAI/NavigationAgent2D")
+aggro_distance = 100
+deaggro_distance = 200
+navReg = NodePath("../Navigation")
+
+[node name="EnemyBase3" parent="." node_paths=PackedStringArray("nav_agent", "navReg") instance=ExtResource("2_55tdi")]
+position = Vector2(436, 428)
+nav_agent = NodePath("../EnemyBase/ChasingAI/NavigationAgent2D")
+aggro_distance = 100
+deaggro_distance = 200
+navReg = NodePath("../Navigation")
+
+[node name="EnemyBase4" parent="." node_paths=PackedStringArray("nav_agent", "navReg") instance=ExtResource("2_55tdi")]
+position = Vector2(141, 450)
+nav_agent = NodePath("../EnemyBase/ChasingAI/NavigationAgent2D")
+aggro_distance = 100
+deaggro_distance = 200
+navReg = NodePath("../Navigation")

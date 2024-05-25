@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4qe488njv2hm"]
 
-[ext_resource type="Script" path="res://menu/menu.gd" id="1_e8wjo"]
+[ext_resource type="Script" path="res://import/menu/menu.gd" id="1_e8wjo"]
 [ext_resource type="PackedScene" uid="uid://2i4maetjcmsq" path="res://effects/space_background.tscn" id="2_bvr7d"]
 [ext_resource type="LabelSettings" uid="uid://3op6wimw43qu" path="res://fonts/title_label_settings.tres" id="3_2xsrd"]
 [ext_resource type="LabelSettings" uid="uid://cwhudvn8mpe23" path="res://fonts/default_label_settings.tres" id="4_71w48"]
