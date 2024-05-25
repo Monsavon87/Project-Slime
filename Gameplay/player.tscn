@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Gameplay/player.gd" id="1_b147c"]
 [ext_resource type="Texture2D" uid="uid://dujsrqga5hmxa" path="res://Gameplay/Sprites/shadow.png" id="2_pq0v5"]
-[ext_resource type="Texture2D" uid="uid://bu614o0p08m24" path="res://Gameplay/Sprites/wizard.png" id="3_6vrvk"]
+[ext_resource type="Texture2D" uid="uid://1hlnxaadv6tr" path="res://assets/sprites/characters/slime.png" id="3_sny40"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvboj"]
 radius = 5.0
@@ -66,6 +66,10 @@ _data = {
 radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player", "player"]]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_b147c")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -74,8 +78,11 @@ position = Vector2(0, 1)
 texture = ExtResource("2_pq0v5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_6vrvk")
+texture = ExtResource("3_sny40")
 offset = Vector2(2.08165e-12, -8)
+hframes = 7
+vframes = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

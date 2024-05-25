@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://biagvoa707qhp"]
+[gd_scene load_steps=5 format=3 uid="uid://biagvoa707qhp"]
 
 [ext_resource type="Script" path="res://entity/enemy/enemy_base.gd" id="1_l0kh0"]
-[ext_resource type="Texture2D" uid="uid://bj0nex3vjtpln" path="res://assets/icon.svg" id="2_840nr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31ax4"]
 radius = 7.0
@@ -14,7 +13,9 @@ radius = 10.4403
 
 [node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent")]
 z_index = 1
+y_sort_enabled = true
 collision_layer = 8
+collision_mask = 11
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_l0kh0")
@@ -23,8 +24,6 @@ target_distance = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.38419e-07, 0)
-scale = Vector2(0.118499, 0.0657423)
-texture = ExtResource("2_840nr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_31ax4")

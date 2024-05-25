@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bexa6fucdrfsw"]
+
+[ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="1_yrvru"]
+[ext_resource type="Texture2D" uid="uid://2h85vsfo6l7y" path="res://assets/Ninja Adventure - Asset Pack/Actor/Characters/Skeleton/SpriteSheet.png" id="2_dmg8u"]
+
+[node name="skeleton" instance=ExtResource("1_yrvru")]
+aggro_distance = 40
+deaggro_distance = 80
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_dmg8u")
+hframes = 4
+vframes = 7

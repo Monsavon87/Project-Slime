@@ -37,6 +37,7 @@ tilemap = NodePath("../../Ground")
 
 [node name="TowerDoor" parent="." instance=ExtResource("5_lysby")]
 position = Vector2(472, 254)
+collision_mask = 2
 entry_direction = 2
 transition_type = "fade_to_black"
 push_distance = 20
