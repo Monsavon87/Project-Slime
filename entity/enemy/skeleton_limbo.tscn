@@ -6,19 +6,19 @@
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_hst75"]
 
-[node name="skeleton_limbo" instance=ExtResource("1_517ko")]
+[node name="skeleton_limbo" groups=["mele"] instance=ExtResource("1_517ko")]
 
 [node name="Sprite2D" parent="Root" index="0"]
-position = Vector2(0, -8)
 texture = ExtResource("2_18nmu")
+offset = Vector2(0, -8)
 hframes = 4
 vframes = 7
 
 [node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
-position = Vector2(0, -3)
+position = Vector2(0, -6)
 
 [node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
-position = Vector2(0, -3)
+position = Vector2(0, -6)
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -3)

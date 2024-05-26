@@ -23,6 +23,7 @@ format = 2
 [node name="Navigation" type="NavigationRegion2D" parent="."]
 
 [node name="obstacle" type="TileMap" parent="Navigation"]
+y_sort_enabled = true
 tile_set = ExtResource("2_w5ek0")
 format = 2
 layer_0/tile_data = PackedInt32Array(1048605, 1507337, 0)
