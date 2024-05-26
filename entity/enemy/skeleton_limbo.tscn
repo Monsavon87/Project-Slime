@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://5cj2xb87pwp4"]
+
+[ext_resource type="PackedScene" uid="uid://bevjllmtq8hdr" path="res://entity/agent.tscn" id="1_517ko"]
+[ext_resource type="Texture2D" uid="uid://2h85vsfo6l7y" path="res://assets/Ninja Adventure - Asset Pack/Actor/Characters/Skeleton/SpriteSheet.png" id="2_18nmu"]
+[ext_resource type="BehaviorTree" uid="uid://cyggidjorbnta" path="res://ai/tree/limbotest.tres" id="3_kqtuy"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_hst75"]
+
+[node name="skeleton_limbo" instance=ExtResource("1_517ko")]
+
+[node name="Sprite2D" parent="Root" index="0"]
+position = Vector2(0, -8)
+texture = ExtResource("2_18nmu")
+hframes = 4
+vframes = 7
+
+[node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
+position = Vector2(0, -3)
+
+[node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
+position = Vector2(0, -3)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -3)
+rotation = 1.5708
+
+[node name="BTPlayer" type="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("3_kqtuy")
+blackboard_plan = SubResource("BlackboardPlan_hst75")

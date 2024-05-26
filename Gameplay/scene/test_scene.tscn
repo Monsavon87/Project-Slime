@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b8ldxowcludm" path="res://Gameplay/player.tscn" id="4_d8jsr"]
 [ext_resource type="PackedScene" uid="uid://cjpx1bp7fmcqh" path="res://components/follow_camera.tscn" id="5_tra00"]
 [ext_resource type="PackedScene" uid="uid://b0o33vveq8wx5" path="res://Gameplay/door.tscn" id="7_5cna1"]
-[ext_resource type="PackedScene" uid="uid://bexa6fucdrfsw" path="res://entity/enemy/skeleton.tscn" id="7_a3gni"]
+[ext_resource type="PackedScene" uid="uid://5cj2xb87pwp4" path="res://entity/enemy/skeleton_limbo.tscn" id="7_sdphn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_uik6s"]
 parsed_collision_mask = 4278190081
@@ -55,24 +55,5 @@ push_distance = 20
 path_to_new_scene = "res://Gameplay/Levels/hub.tscn"
 entry_door_name = "TowerDoor"
 
-[node name="skeleton" parent="." node_paths=PackedStringArray("navReg") instance=ExtResource("7_a3gni")]
-y_sort_enabled = false
-position = Vector2(453, 183)
-collision_mask = 1
-aggro_distance = 50
-deaggro_distance = 100
-navReg = NodePath("../Navigation")
-
-[node name="skeleton3" parent="." node_paths=PackedStringArray("nav_agent", "navReg") instance=ExtResource("7_a3gni")]
-y_sort_enabled = false
-position = Vector2(293, 428)
-collision_mask = 1
-nav_agent = NodePath("../skeleton/ChasingAI/NavigationAgent2D")
-navReg = NodePath("../Navigation")
-
-[node name="skeleton2" parent="." node_paths=PackedStringArray("nav_agent", "navReg") instance=ExtResource("7_a3gni")]
-y_sort_enabled = false
-position = Vector2(592, 383)
-collision_mask = 1
-nav_agent = NodePath("../skeleton/ChasingAI/NavigationAgent2D")
-navReg = NodePath("../Navigation")
+[node name="skeleton_limbo" parent="." instance=ExtResource("7_sdphn")]
+position = Vector2(436, 241)

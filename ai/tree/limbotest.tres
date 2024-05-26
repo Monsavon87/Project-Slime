@@ -1,0 +1,73 @@
+[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://cyggidjorbnta"]
+
+[ext_resource type="Script" path="res://ai/tasks/get_first_in_group.gd" id="1_ucnwr"]
+[ext_resource type="Script" path="res://ai/tasks/in_range.gd" id="2_milxk"]
+[ext_resource type="Script" path="res://ai/tasks/pursue.gd" id="3_1v0fr"]
+[ext_resource type="Script" path="res://ai/tasks/select_random_nearby_pos.gd" id="4_cmkjd"]
+[ext_resource type="Script" path="res://ai/tasks/arrive_pos.gd" id="5_wumye"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_gqft6"]
+var/speed/name = &"speed"
+var/speed/type = 3
+var/speed/value = 20.0
+var/speed/hint = 1
+var/speed/hint_string = "10,1000,10"
+
+[sub_resource type="BTAction" id="BTAction_jqp7p"]
+script = ExtResource("1_ucnwr")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_eks70"]
+children = [SubResource("BTAction_jqp7p")]
+
+[sub_resource type="BTCondition" id="BTCondition_7iyqd"]
+script = ExtResource("2_milxk")
+distance_min = 0.0
+distance_max = 100.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_cwewd"]
+script = ExtResource("3_1v0fr")
+target_var = &"target"
+speed_var = &"speed"
+approach_distance = 0.0
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_r76jk"]
+time_limit = 3.0
+children = [SubResource("BTAction_cwewd")]
+
+[sub_resource type="BTSequence" id="BTSequence_r74ih"]
+children = [SubResource("BTCondition_7iyqd"), SubResource("BTTimeLimit_r76jk")]
+
+[sub_resource type="BTCondition" id="BTCondition_icfje"]
+script = ExtResource("2_milxk")
+distance_min = 100.0
+distance_max = 500.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_o1wcd"]
+script = ExtResource("4_cmkjd")
+range_min = 10.0
+range_max = 100.0
+position_var = &"pos"
+
+[sub_resource type="BTAction" id="BTAction_a1na2"]
+script = ExtResource("5_wumye")
+target_position_var = &"pos"
+speed_var = &"speed"
+tolerance = 5.0
+avoid_var = &""
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_e3sra"]
+children = [SubResource("BTAction_a1na2")]
+
+[sub_resource type="BTSequence" id="BTSequence_aivox"]
+children = [SubResource("BTCondition_icfje"), SubResource("BTAction_o1wcd"), SubResource("BTTimeLimit_e3sra")]
+
+[sub_resource type="BTSelector" id="BTSelector_8nyug"]
+children = [SubResource("BTRunLimit_eks70"), SubResource("BTSequence_r74ih"), SubResource("BTSequence_aivox")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_gqft6")
+root_task = SubResource("BTSelector_8nyug")

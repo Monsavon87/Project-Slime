@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://84kdml16v5s4" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_gdgwx"]
 [ext_resource type="Texture2D" uid="uid://cte87l6r1h67j" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="2_y78xe"]
-[ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://entity/player/player.tscn" id="3_f27ir"]
+[ext_resource type="PackedScene" uid="uid://cldatf842lhhj" path="res://entity/player/player_old.tscn" id="3_f27ir"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bhi3x"]
 texture = ExtResource("1_gdgwx")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1ena0g35cw38"]
+
+[ext_resource type="Script" path="res://Gameplay/game_play.gd" id="1_2q6wv"]
+[ext_resource type="PackedScene" uid="uid://5qsw50ugad5m" path="res://Gameplay/Levels/hub.tscn" id="2_bff5u"]
+
+[node name="gameplay" type="Node2D" groups=["Gameplay", "gameplay"]]
+script = ExtResource("1_2q6wv")
+
+[node name="LevelHolder" type="Node2D" parent="." groups=["Gameplay", "gameplay"]]
+
+[node name="Hub" parent="LevelHolder" instance=ExtResource("2_bff5u")]
