@@ -1,123 +1,54 @@
-[gd_scene load_steps=14 format=3 uid="uid://bt1djhj40sey4"]
+[gd_scene load_steps=8 format=3 uid="uid://bevjllmtq8hdr"]
 
+[ext_resource type="Script" path="res://entity/scripts/hurtbox.gd" id="1_kj6h3"]
 [ext_resource type="Script" path="res://entity/scripts/agent_base.gd" id="1_ldmgw"]
+[ext_resource type="Script" path="res://entity/scripts/hitbox.gd" id="2_4vla8"]
 [ext_resource type="Script" path="res://entity/scripts/health.gd" id="4_b131l"]
-[ext_resource type="BehaviorTree" uid="uid://cyggidjorbnta" path="res://ai/tree/limbotest.tres" id="5_6blp7"]
-[ext_resource type="Texture2D" uid="uid://dj4oayt5ttvh8" path="res://demo/assets/fx.png" id="7_kphv4"]
-[ext_resource type="Texture2D" uid="uid://bdusy0qqtw0th" path="res://demo/assets/smoke.png" id="8_x213x"]
 
-[sub_resource type="Curve" id="Curve_noh01"]
-_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.151111, 1), 1.3559, 1.3559, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvvm6"]
+radius = 6.0
 
-[sub_resource type="CurveTexture" id="CurveTexture_sb0wp"]
-curve = SubResource("Curve_noh01")
+[sub_resource type="CircleShape2D" id="CircleShape2D_gc885"]
+radius = 7.0
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f5i1x"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(40, 1, 1)
-direction = Vector3(0, -1, 0)
-spread = 90.0
-initial_velocity_min = 150.0
-initial_velocity_max = 250.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -90.0
-radial_accel_max = 90.0
-damping_min = 200.0
-damping_max = 200.0
-scale_min = 0.8
-scale_max = 1.2
-scale_curve = SubResource("CurveTexture_sb0wp")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8622"]
+radius = 3.0
+height = 12.0
 
-[sub_resource type="Curve" id="Curve_e33mb"]
-_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.151111, 1), 1.3559, 1.3559, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_qti8k"]
-curve = SubResource("Curve_e33mb")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gmal1"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(40, 1, 1)
-direction = Vector3(0, -1, 0)
-spread = 90.0
-initial_velocity_min = 150.0
-initial_velocity_max = 250.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -90.0
-radial_accel_max = 90.0
-damping_min = 200.0
-damping_max = 200.0
-scale_min = 0.8
-scale_max = 1.2
-scale_curve = SubResource("CurveTexture_qti8k")
-color = Color(0.913725, 0.8, 0.898039, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0c228"]
-radius = 4.47214
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_3b7n0"]
-
-[node name="AgentBase" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 3
+[node name="Agent" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 11
 motion_mode = 1
-wall_min_slide_angle = 0.0174533
-safe_margin = 0.001
+wall_min_slide_angle = 0.0349066
 script = ExtResource("1_ldmgw")
 
 [node name="Root" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Root"]
+[node name="shadow" type="Sprite2D" parent="Root"]
+
+[node name="body" type="Sprite2D" parent="Root"]
+
+[node name="Hurtbox" type="Area2D" parent="Root"]
+script = ExtResource("1_kj6h3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hurtbox"]
+shape = SubResource("CircleShape2D_nvvm6")
+debug_color = Color(0.668856, 0.508138, 0.112493, 0.42)
+
+[node name="Hitbox" type="Area2D" parent="Root"]
+script = ExtResource("2_4vla8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hitbox"]
+shape = SubResource("CircleShape2D_gc885")
+debug_color = Color(0.952141, 0.1103, 0.477722, 0.42)
 
 [node name="FX" type="Node2D" parent="."]
 
-[node name="Cloud" type="Sprite2D" parent="FX"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_kphv4")
-region_enabled = true
-region_rect = Rect2(300, 0, 100, 70)
-
-[node name="Death" type="GPUParticles2D" parent="FX"]
-position = Vector2(1, 1)
-emitting = false
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_f5i1x")
-texture = ExtResource("8_x213x")
-lifetime = 0.7
-one_shot = true
-explosiveness = 0.7
-fixed_fps = 60
-
-[node name="Summoned" type="GPUParticles2D" parent="FX"]
-emitting = false
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_gmal1")
-texture = ExtResource("8_x213x")
-lifetime = 1.4
-one_shot = true
-explosiveness = 0.5
-fixed_fps = 60
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CircleShape2D_0c228")
+shape = SubResource("CapsuleShape2D_q8622")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_b131l")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-callback_mode_method = 1
-autoplay = "idle"
-
-[node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("5_6blp7")
-blackboard_plan = SubResource("BlackboardPlan_3b7n0")

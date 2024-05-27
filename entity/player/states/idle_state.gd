@@ -21,7 +21,7 @@ func _enter() -> void:
 
 
 func _update(_delta: float) -> void:
-	var horizontal_move: float = Input.get_axis(&"move_left", &"move_right")
-	var vertical_move: float = Input.get_axis(&"move_up", &"move_down")
+	var horizontal_move: float = Input.get_axis("ui_left","ui_right")
+	var vertical_move: float = Input.get_axis("ui_up","ui_down")
 	if horizontal_move != 0.0 or vertical_move != 0.0:
 		get_root().dispatch(EVENT_FINISHED)

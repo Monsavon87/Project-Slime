@@ -8,17 +8,20 @@
 #* https://opensource.org/licenses/MIT.
 #* =============================================================================
 #*
-extends "res://demo/agents/scripts/agent_base.gd"
+class_name Player
+extends "res://entity/scripts/agent_base.gd"
 
 ## Player.
-
+@export var input_enabled:bool = true
 @export var dodge_cooldown: float = 0.4
+@export var sprite = Sprite2D
 
 @onready var hsm: LimboHSM = $LimboHSM
 @onready var idle_state: LimboState = $LimboHSM/IdleState
 @onready var move_state: LimboState = $LimboHSM/MoveState
 @onready var attack_state: LimboState = $LimboHSM/AttackState
 @onready var dodge_state: LimboState = $LimboHSM/DodgeState
+
 
 var can_dodge: bool = true
 var attack_pressed: bool = false
@@ -27,7 +30,7 @@ var attack_pressed: bool = false
 func _ready() -> void:
 	super._ready()
 	can_dodge = true
-	_init_input_events()
+	#_init_input_events()
 	_init_state_machine()
 	death.connect(func(): remove_from_group(&"player"))
 
@@ -72,13 +75,13 @@ func _init_state_machine() -> void:
 
 func _init_input_events() -> void:
 	# Note: Ensures that input events are present even if project.godot wasn't imported.
-	_add_action(&"move_left", KEY_A)
-	_add_action(&"move_right", KEY_D)
-	_add_action(&"move_up", KEY_W)
-	_add_action(&"move_down", KEY_S)
-	_add_action(&"dodge", KEY_SPACE)
-	_add_action(&"attack", KEY_ENTER, KEY_F)
-
+	#_add_action(&"move_left", KEY_A)
+	#_add_action(&"move_right", KEY_D)
+	#_add_action(&"move_up", KEY_W)
+	#_add_action(&"move_down", KEY_S)
+	#_add_action(&"dodge", KEY_SPACE)
+	#_add_action(&"attack", KEY_ENTER, KEY_F)
+	pass
 
 func _add_action(p_action: StringName, p_key: Key, p_alt: Key = KEY_NONE) -> void:
 	if not InputMap.has_action(p_action):
@@ -102,3 +105,15 @@ func _can_dodge() -> bool:
 		get_tree().create_timer(dodge_cooldown).timeout.connect(func(): can_dodge = true)
 		return true
 	return false
+
+func orient(dir:Vector2) -> void:
+	if dir.x:
+		sprite.flip_h = dir.x < 0
+
+func disable():
+	input_enabled = false
+	animation_player.play("idle")
+
+func enable():
+	input_enabled = true
+	visible = true

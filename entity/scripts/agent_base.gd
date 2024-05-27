@@ -48,6 +48,7 @@ func _post_physics_process() -> void:
 	_moved_this_frame = false
 
 
+
 func move(p_velocity: Vector2) -> void:
 	velocity = lerp(velocity, p_velocity, 0.2)
 	move_and_slide()

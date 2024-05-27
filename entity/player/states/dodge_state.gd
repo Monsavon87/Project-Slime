@@ -26,14 +26,15 @@ func _enter() -> void:
 	elapsed_time = 0.0
 	hurtbox_collision.disabled = true
 
-	var horizontal_move: float = Input.get_axis(&"move_left", &"move_right")
+	var horizontal_move: float = Input.get_axis("ui_left","ui_right")
+	var vertical_move: float = Input.get_axis("ui_up","ui_down")
 	if is_zero_approx(horizontal_move):
 		move_dir = Vector2.RIGHT * agent.get_facing()
 	else:
 		move_dir = Vector2.RIGHT * signf(horizontal_move)
 	agent.face_dir(move_dir.x)
 
-	animation_player.play(animation, 0.1)
+	animation_player.play(animation)
 
 
 func _exit() -> void:

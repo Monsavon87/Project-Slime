@@ -1,4 +1,5 @@
-class_name Player extends CharacterBody2D
+class_name Players
+extends CharacterBody2D
 
 ## Sample player controller - only included to demonstrate SceneManager. There's no logic here you need to review
 ## unless you're building something very similar to the sample project :)
