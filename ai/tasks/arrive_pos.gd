@@ -65,5 +65,5 @@ func _tick(_delta: float) -> Status:
 
 	var desired_velocity: Vector2 = dir.normalized() * speed
 	agent.move(desired_velocity)
-	agent.update_facing()
+	#agent.update_facing()
 	return RUNNING

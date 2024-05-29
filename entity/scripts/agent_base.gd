@@ -1,26 +1,7 @@
-#*
-#* agent_base.gd
-#* =============================================================================
-#* Copyright 2021-2024 Serhii Snitsaruk
-#*
-#* Use of this source code is governed by an MIT-style
-#* license that can be found in the LICENSE file or at
-#* https://opensource.org/licenses/MIT.
-#* =============================================================================
-#*
 extends CharacterBody2D
 ## Base agent script that is shared by all agents.
 
 signal death
-
-# Resource file to use in summon_minion() method.
-const MINION_RESOURCE := "res://demo/agents/03_agent_imp.tscn"
-
-# Projectile resource.
-const NinjaStar := preload("res://entity/projectile/ninja_star/ninja_star.tscn")
-const Fireball := preload("res://entity/projectile/fireball/fireball.tscn")
-
-var summon_count: int = 0
 
 var _frames_since_facing_update: int = 0
 var _is_dead: bool = false
@@ -31,6 +12,8 @@ var _moved_this_frame: bool = false
 @onready var root: Node2D = $Root
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var summoning_effect: GPUParticles2D = $FX/Summoned
+@onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
 
 
 func _ready() -> void:
@@ -45,63 +28,19 @@ func _physics_process(_delta: float) -> void:
 func _post_physics_process() -> void:
 	if not _moved_this_frame:
 		velocity = lerp(velocity, Vector2.ZERO, 0.5)
+		
+		animation_state.travel("Idle")
 	_moved_this_frame = false
-
-
 
 func move(p_velocity: Vector2) -> void:
 	velocity = lerp(velocity, p_velocity, 0.2)
+	
+	if p_velocity != Vector2.ZERO:
+		animation_tree.set("parameters/Walk/Walk/blend_position", p_velocity)
+		animation_tree.set("parameters/Idle/Idle/blend_position", p_velocity)	
+		animation_state.travel("Walk")
 	move_and_slide()
 	_moved_this_frame = true
-
-
-## Update agent's facing in the velocity direction.
-func update_facing() -> void:
-	_frames_since_facing_update += 1
-	if _frames_since_facing_update > 3:
-		face_dir(velocity.x)
-
-## Face specified direction.
-func face_dir(dir: float) -> void:
-	if dir > 0.0 and root.scale.x < 0.0:
-		root.scale.x = 1.0;
-		_frames_since_facing_update = 0
-	if dir < 0.0 and root.scale.x > 0.0:
-		root.scale.x = -1.0;
-		_frames_since_facing_update = 0
-
-## Returns 1.0 when agent is facing right.
-## Returns -1.0 when agent is facing left.
-func get_facing() -> float:
-	return signf(root.scale.x)
-
-
-func throw_ninja_star() -> void:
-	var ninja_star := NinjaStar.instantiate()
-	ninja_star.dir = get_facing()
-	get_parent().add_child(ninja_star)
-	ninja_star.global_position = global_position + Vector2.RIGHT * 100.0 * get_facing()
-
-
-func spit_fire() -> void:
-	var fireball := Fireball.instantiate()
-	fireball.dir = get_facing()
-	get_parent().add_child(fireball)
-	fireball.global_position = global_position + Vector2.RIGHT * 100.0 * get_facing()
-
-
-func summon_minion(p_position: Vector2) -> void:
-	var minion: CharacterBody2D = load(MINION_RESOURCE).instantiate()
-	get_parent().add_child(minion)
-	minion.position = p_position
-	minion.play_summoning_effect()
-	summon_count += 1
-	minion.death.connect(func(): summon_count -= 1)
-
-
-## Method is used when this agent is summoned from the dungeons of the castle AaaAaaAAAAAaaAAaaaaaa
-func play_summoning_effect() -> void:
-	summoning_effect.emitting = true
 
 
 ## Is specified position inside the arena (not inside an obstacle)?

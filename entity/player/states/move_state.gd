@@ -20,8 +20,8 @@ const VERTICAL_FACTOR := 0.8
 
 
 func _enter() -> void:
-	animation_player.play(animation)
-	
+	#animation_player.play(animation)
+	pass
 
 #func _update(_delta: float) -> void:
 	#var horizontal_move: float = Input.get_axis("ui_left","ui_right")
@@ -40,8 +40,8 @@ func _update(_delta: float) -> void:
 	var horizontal_move: float = Input.get_axis("ui_left","ui_right")
 	var vertical_move: float = Input.get_axis("ui_up","ui_down")
 
-	if not is_zero_approx(horizontal_move):
-		agent.face_dir(horizontal_move)
+	#if not is_zero_approx(horizontal_move):
+		#agent.face_dir(horizontal_move)
 
 	# Crée le vecteur de déplacement désiré
 	var desired_velocity := Vector2(horizontal_move, vertical_move * VERTICAL_FACTOR)
@@ -49,7 +49,8 @@ func _update(_delta: float) -> void:
 	# Normalise le vecteur de déplacement désiré
 	if desired_velocity != Vector2.ZERO:
 		desired_velocity = desired_velocity.normalized()
-
+	#envoi la direction pour l'animation
+	#agent.set_animation_blend(desired_velocity)
 	# Multiplie le vecteur normalisé par la vitesse
 	desired_velocity *= speed
 

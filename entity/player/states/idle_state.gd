@@ -17,8 +17,8 @@ extends LimboState
 
 
 func _enter() -> void:
-	animation_player.play(idle_animation, 0.1)
-
+	#animation_player.play(idle_animation, 0.1)
+	pass
 
 func _update(_delta: float) -> void:
 	var horizontal_move: float = Input.get_axis("ui_left","ui_right")

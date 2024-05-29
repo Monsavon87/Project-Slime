@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://cyggidjorbnta"]
+[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://cyggidjorbnta"]
 
 [ext_resource type="Script" path="res://ai/tasks/get_first_in_group.gd" id="1_ucnwr"]
 [ext_resource type="Script" path="res://ai/tasks/in_range.gd" id="2_milxk"]
@@ -34,7 +34,7 @@ speed_var = &"speed"
 approach_distance = 0.0
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_r76jk"]
-time_limit = 3.0
+time_limit = 2.0
 children = [SubResource("BTAction_cwewd")]
 
 [sub_resource type="BTSequence" id="BTSequence_r74ih"]
@@ -60,10 +60,15 @@ tolerance = 5.0
 avoid_var = &""
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_e3sra"]
+time_limit = 2.0
 children = [SubResource("BTAction_a1na2")]
 
+[sub_resource type="BTDelay" id="BTDelay_t4jqf"]
+seconds = 2.0
+children = [SubResource("BTAction_o1wcd"), SubResource("BTTimeLimit_e3sra")]
+
 [sub_resource type="BTSequence" id="BTSequence_aivox"]
-children = [SubResource("BTCondition_icfje"), SubResource("BTAction_o1wcd"), SubResource("BTTimeLimit_e3sra")]
+children = [SubResource("BTCondition_icfje"), SubResource("BTDelay_t4jqf")]
 
 [sub_resource type="BTSelector" id="BTSelector_8nyug"]
 children = [SubResource("BTRunLimit_eks70"), SubResource("BTSequence_r74ih"), SubResource("BTSequence_aivox")]
