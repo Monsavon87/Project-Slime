@@ -59,6 +59,30 @@ collision_mask = 1
 motion_mode = 0
 wall_min_slide_angle = 0.261799
 
+[node name="skeleton_limbo2" parent="." instance=ExtResource("7_sdphn")]
+y_sort_enabled = false
+position = Vector2(595, 422)
+collision_layer = 1
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+
+[node name="skeleton_limbo3" parent="." instance=ExtResource("7_sdphn")]
+y_sort_enabled = false
+position = Vector2(701, 110)
+collision_layer = 1
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+
+[node name="skeleton_limbo4" parent="." instance=ExtResource("7_sdphn")]
+y_sort_enabled = false
+position = Vector2(171, 359)
+collision_layer = 1
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+
 [node name="Player" parent="." instance=ExtResource("7_ls4qy")]
 position = Vector2(136, 127)
 

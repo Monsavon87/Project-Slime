@@ -15,29 +15,9 @@ radius = 7.0
 radius = 3.0
 height = 12.0
 
-[sub_resource type="Animation" id="Animation_agkf2"]
-resource_name = "idle_left"
-
-[sub_resource type="Animation" id="Animation_akbtu"]
-resource_name = "idle_right"
-
-[sub_resource type="Animation" id="Animation_1oo6k"]
-resource_name = "idle_up"
-
-[sub_resource type="Animation" id="Animation_p035u"]
-resource_name = "idle_down"
-
-[sub_resource type="Animation" id="Animation_agvxs"]
-resource_name = "walk_left"
-
-[sub_resource type="Animation" id="Animation_bj65w"]
-resource_name = "walk_right"
-
-[sub_resource type="Animation" id="Animation_pwwdc"]
-resource_name = "walk_up"
-
-[sub_resource type="Animation" id="Animation_d3oaw"]
-resource_name = "walk_down"
+[sub_resource type="Animation" id="Animation_4v5h3"]
+resource_name = "attack_down"
+length = 0.4
 
 [sub_resource type="Animation" id="Animation_pephs"]
 resource_name = "attack_left"
@@ -48,9 +28,8 @@ resource_name = "attack_right"
 [sub_resource type="Animation" id="Animation_gol8l"]
 resource_name = "attack_up"
 
-[sub_resource type="Animation" id="Animation_4v5h3"]
-resource_name = "attack_down"
-length = 0.4
+[sub_resource type="Animation" id="Animation_c6s6r"]
+resource_name = "dodge_down"
 
 [sub_resource type="Animation" id="Animation_ean22"]
 resource_name = "dodge_left"
@@ -61,8 +40,29 @@ resource_name = "dodge_right"
 [sub_resource type="Animation" id="Animation_q635f"]
 resource_name = "dodge_up"
 
-[sub_resource type="Animation" id="Animation_c6s6r"]
-resource_name = "dodge_down"
+[sub_resource type="Animation" id="Animation_p035u"]
+resource_name = "idle_down"
+
+[sub_resource type="Animation" id="Animation_agkf2"]
+resource_name = "idle_left"
+
+[sub_resource type="Animation" id="Animation_akbtu"]
+resource_name = "idle_right"
+
+[sub_resource type="Animation" id="Animation_1oo6k"]
+resource_name = "idle_up"
+
+[sub_resource type="Animation" id="Animation_d3oaw"]
+resource_name = "walk_down"
+
+[sub_resource type="Animation" id="Animation_agvxs"]
+resource_name = "walk_left"
+
+[sub_resource type="Animation" id="Animation_bj65w"]
+resource_name = "walk_right"
+
+[sub_resource type="Animation" id="Animation_pwwdc"]
+resource_name = "walk_up"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hxg0u"]
 _data = {

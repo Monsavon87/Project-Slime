@@ -18,7 +18,6 @@ func can_enter() -> bool:
 
 func _enter() -> void:
 	var mouse_vector = agent.mouse_vector
-	print(mouse_vector)
 	animation_tree.set("parameters/Attack/Attack/blend_position", mouse_vector)
 	animation_state.travel("Attack")
 	agent.attacking()
