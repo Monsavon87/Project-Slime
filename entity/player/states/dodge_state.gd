@@ -14,8 +14,8 @@ extends LimboState
 
 @export var animation_player: AnimationPlayer
 @export var animation: StringName
-@export var duration: float = 0.4
-@export var dodge_speed: float = 1000.0
+@export var duration: float = 0.2
+@export var dodge_speed: float = 5.0
 @export var hurtbox_collision: CollisionShape2D
 
 var move_dir: Vector2
@@ -25,8 +25,7 @@ var elapsed_time: float
 func _enter() -> void:
 	elapsed_time = 0.0
 	hurtbox_collision.disabled = true
-
-	
+	move_dir = agent.dir
 	
 	animation_player.play(animation)
 

@@ -283,3 +283,7 @@ libraries = {
 [node name="BTPlayer" type="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("3_kqtuy")
 blackboard_plan = SubResource("BlackboardPlan_hst75")
+
+[node name="AnimationTree" parent="." index="6"]
+parameters/Attack/Attack/blend_position = Vector2(0, 0)
+parameters/Dodge/Dodge/blend_position = Vector2(0, 0)

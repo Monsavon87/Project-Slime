@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3cslmx0huixq"]
+[gd_scene load_steps=24 format=3 uid="uid://d3cslmx0huixq"]
 
 [ext_resource type="PackedScene" uid="uid://bevjllmtq8hdr" path="res://entity/agent_base.tscn" id="1_kk54b"]
 [ext_resource type="Script" path="res://entity/player/player.gd" id="2_sse24"]
@@ -24,23 +24,6 @@ tracks/0/keys = {
 "values": [9]
 }
 
-[sub_resource type="Animation" id="Animation_lirry"]
-resource_name = "attack"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Root/body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [24, 25, 26, 27]
-}
-
 [sub_resource type="Animation" id="Animation_vfyj7"]
 resource_name = "attack_down"
 length = 0.4
@@ -51,10 +34,10 @@ tracks/0/path = NodePath("Root/body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [28, 29, 30, 31]
+"values": [28, 29, 30, 31, 28]
 }
 
 [sub_resource type="Animation" id="Animation_0kr7x"]
@@ -67,26 +50,10 @@ tracks/0/path = NodePath("Root/body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 18, 19]
-}
-
-[sub_resource type="Animation" id="Animation_jn0kx"]
-resource_name = "dodge"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Root/body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [40, 41, 42, 43]
+"values": [16, 17, 18, 19, 16]
 }
 
 [sub_resource type="Animation" id="Animation_1hdlu"]
@@ -233,13 +200,74 @@ tracks/0/keys = {
 "values": [44, 45, 46, 47]
 }
 
+[sub_resource type="Animation" id="Animation_lirry"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 24]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/body:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jn0kx"]
+resource_name = "dodge"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_tqloa"]
+resource_name = "attack_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 20]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_py4j5"]
 _data = {
 "RESET": SubResource("Animation_jhx56"),
-"attack": SubResource("Animation_lirry"),
 "attack_down": SubResource("Animation_vfyj7"),
+"attack_left": SubResource("Animation_tqloa"),
+"attack_right": SubResource("Animation_lirry"),
 "attack_up": SubResource("Animation_0kr7x"),
-"dodge": SubResource("Animation_jn0kx"),
+"dodge_right": SubResource("Animation_jn0kx"),
 "idle_down": SubResource("Animation_nbmch"),
 "idle_left": SubResource("Animation_gp1ol"),
 "idle_right": SubResource("Animation_1hdlu"),
@@ -311,19 +339,12 @@ script = ExtResource("4_w5irs")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"walk"
 
-[node name="AttackState" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("animation_player", "hitbox")]
+[node name="AttackState" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_5m7tt")
-animation_player = NodePath("../../AnimationPlayer")
-animations = Array[StringName]([&"attack", &"attack_up", &"attack_down"])
 hitbox = NodePath("../../Root/Hitbox")
 
 [node name="DodgeState" type="LimboState" parent="LimboHSM" index="3" node_paths=PackedStringArray("animation_player", "hurtbox_collision")]
 script = ExtResource("6_uqx5x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"dodge"
-duration = 0.2
-dodge_speed = 200.0
 hurtbox_collision = NodePath("../../Root/Hurtbox/CollisionShape2D")
-
-[node name="AnimationTree" parent="." index="6"]
-parameters/Idle/Idle/blend_position = Vector2(0.00120437, 0.00346017)

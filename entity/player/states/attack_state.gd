@@ -1,56 +1,31 @@
 extends LimboState
 
-@export var animation_player: AnimationPlayer
-#@export var animations_up: Array[StringName]  # Animations pour le mouvement vers le haut
-#@export var animations_down: Array[StringName]  # Animations pour le mouvement vers le bas
-@export var animations: Array[StringName]  # Liste d'animations pour tous les mouvements
-
 @export var hitbox: Hitbox
-@export var attack_delay = 0.5
+@export var attack_delay = 0.4
 @export var attack_dmg = 1
+
 
 var last_attack_msec: int = -10000
 var _can_enter: bool = true
+
+@onready var animation_tree: AnimationTree = $"../../AnimationTree"
+@onready var animation_state = animation_tree.get("parameters/playback")
+
 
 func can_enter() -> bool:
 	return _can_enter
 
 
 func _enter() -> void:
-	var horizontal_move: float = Input.get_axis("ui_left","ui_right")
-	var vertical_move: float = Input.get_axis("ui_up","ui_down")
-
-	#if not is_zero_approx(horizontal_move) or not is_zero_approx(vertical_move):
-		#agent.face_dir(horizontal_move)
-
-	# Sélectionne l'animation en fonction du mouvement vertical
-	#var anim_name = get_animation_name(vertical_move)
-	#animation_player.play(anim_name)
-
-	#await animation_player.animation_finished
+	var mouse_vector = agent.mouse_vector
+	print(mouse_vector)
+	animation_tree.set("parameters/Attack/Attack/blend_position", mouse_vector)
+	animation_state.travel("Attack")
+	agent.attacking()
 	if is_active():
 		get_root().dispatch(EVENT_FINISHED)
 
-func get_animation_name(vertical_move: float) -> StringName:
-	if vertical_move > 0:
-		return "attack_up"  # Animation pour se déplacer vers le haut
-	elif vertical_move < 0:
-		return "attack_down"  # Animation pour se déplacer vers le bas
-	else:
-		return "attack"  # Animation pour se déplacer horizontalement
 
-
-#func get_animation_index(horizontal_move: float, vertical_move: float) -> int:
-	#if is_zero_approx(horizontal_move):
-		#if vertical_move > 0:
-			#return 0  # Animation pour se déplacer vers le haut
-		#elif vertical_move < 0:
-			#return 1  # Animation pour se déplacer vers le bas
-	#else:
-		#return 2  # Animation pour se déplacer horizontalement
-	#
-	## Retourne un index par défaut si le mouvement est principalement horizontal
-	#return 2
 
 
 func _exit() -> void:
@@ -59,6 +34,7 @@ func _exit() -> void:
 	if _can_enter:
 		_can_enter = false
 		await get_tree().create_timer(attack_delay).timeout
+		agent.stop_attacking()
 		_can_enter = true
 
 

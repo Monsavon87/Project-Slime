@@ -6,6 +6,8 @@ signal death
 var _frames_since_facing_update: int = 0
 var _is_dead: bool = false
 var _moved_this_frame: bool = false
+var dir: Vector2
+var _is_attacking: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health: Health = $Health
@@ -26,6 +28,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _post_physics_process() -> void:
+	if _is_attacking:
+		return
 	if not _moved_this_frame:
 		velocity = lerp(velocity, Vector2.ZERO, 0.5)
 		
@@ -33,16 +37,23 @@ func _post_physics_process() -> void:
 	_moved_this_frame = false
 
 func move(p_velocity: Vector2) -> void:
-	velocity = lerp(velocity, p_velocity, 0.2)
-	
+	if _is_attacking:
+		return
 	if p_velocity != Vector2.ZERO:
+		dir = p_velocity
+		velocity = lerp(velocity, p_velocity, 0.2)
 		animation_tree.set("parameters/Walk/Walk/blend_position", p_velocity)
-		animation_tree.set("parameters/Idle/Idle/blend_position", p_velocity)	
+		animation_tree.set("parameters/Idle/Idle/blend_position", p_velocity)
 		animation_state.travel("Walk")
+		
 	move_and_slide()
 	_moved_this_frame = true
+func attacking():
+	_is_attacking = true
 
-
+func stop_attacking():
+	_is_attacking = false
+		
 ## Is specified position inside the arena (not inside an obstacle)?
 func is_good_position(p_position: Vector2) -> bool:
 	var space_state := get_world_2d().direct_space_state

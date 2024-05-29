@@ -16,7 +16,7 @@ extends "res://entity/scripts/agent_base.gd"
 
 var can_dodge: bool = true
 var attack_pressed: bool = false
-
+var mouse_vector: Vector2
 
 func _ready() -> void:
 	super._ready()
@@ -24,7 +24,16 @@ func _ready() -> void:
 	_init_state_machine()
 	death.connect(func(): remove_from_group(&"player"))
 
+func _process(delta: float) -> void:
+	# Obtenir la position actuelle de la souris dans le monde
+	var mouse_position = get_global_mouse_position()
 
+	# Calculer le vecteur entre le personnage et la souris
+	var direction_to_mouse = (mouse_position - global_position)
+
+	# Normaliser le vecteur
+	mouse_vector = direction_to_mouse.normalized()
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
@@ -48,6 +57,7 @@ func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, attack_state, "attack!")
 	hsm.add_transition(move_state, attack_state, "attack!")
 	hsm.add_transition(attack_state, move_state, attack_state.EVENT_FINISHED)
+	hsm.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	hsm.add_transition(hsm.ANYSTATE, dodge_state, "dodge!")
 	hsm.add_transition(dodge_state, move_state, dodge_state.EVENT_FINISHED)
 
