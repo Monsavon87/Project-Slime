@@ -9,7 +9,7 @@
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gc885"]
-radius = 7.0
+radius = 6.08276
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8622"]
 radius = 3.0
@@ -201,7 +201,6 @@ nodes/output/position = Vector2(820, 160)
 node_connections = [&"output", 0, &"Walk"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7b0ow"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rsws0"]
 
@@ -283,3 +282,5 @@ parameters/Attack/Attack/blend_position = Vector2(0, 0)
 parameters/Dodge/Dodge/blend_position = Vector2(0, 0)
 parameters/Idle/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/Walk/blend_position = Vector2(0, 0)
+
+[node name="MeleeWeapon" type="Node2D" parent="."]

@@ -24,7 +24,7 @@ func _ready() -> void:
 	_init_state_machine()
 	death.connect(func(): remove_from_group(&"player"))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Obtenir la position actuelle de la souris dans le monde
 	var mouse_position = get_global_mouse_position()
 

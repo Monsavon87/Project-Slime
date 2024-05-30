@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=9 format=3 uid="uid://db8f3pmp7e1gf"]
 
-[ext_resource type="Texture2D" uid="uid://dxak7fhyglnlu" path="res://Gameplay/Sprites/tilemap_packed.png" id="1_ku6cs"]
+[ext_resource type="Texture2D" uid="uid://dxak7fhyglnlu" path="res://assets/Sprite/tilemap_packed.png" id="1_ku6cs"]
 [ext_resource type="Texture2D" uid="uid://b5fnikbidq326" path="res://assets/sprites/tilesets/fences.png" id="2_r4enm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ucm08"]

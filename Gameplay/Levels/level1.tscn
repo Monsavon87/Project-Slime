@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cij3nj1jefg5c"]
 
-[ext_resource type="Texture2D" uid="uid://dxak7fhyglnlu" path="res://Gameplay/Sprites/tilemap_packed.png" id="1_6uaoh"]
+[ext_resource type="Texture2D" uid="uid://dxak7fhyglnlu" path="res://assets/Sprite/tilemap_packed.png" id="1_6uaoh"]
 [ext_resource type="Script" path="res://Gameplay/Levels/level.gd" id="1_nk73a"]
-[ext_resource type="PackedScene" uid="uid://b8ldxowcludm" path="res://Gameplay/player.tscn" id="2_pgpya"]
+[ext_resource type="PackedScene" path="res://Gameplay/player.tscn" id="2_pgpya"]
 [ext_resource type="PackedScene" uid="uid://b0o33vveq8wx5" path="res://Gameplay/door.tscn" id="3_40px8"]
 [ext_resource type="PackedScene" uid="uid://biagvoa707qhp" path="res://entity/enemy/enemy_base.tscn" id="5_vtgdp"]
 

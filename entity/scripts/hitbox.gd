@@ -19,7 +19,7 @@ extends Area2D
 @export var knockback_enabled: bool = false
 
 ## Desired pushback speed.
-@export var knockback_strength: float = 500.0
+@export var knockback_strength: float = 50
 
 
 func _ready() -> void:
@@ -30,7 +30,7 @@ func _area_entered(hurtbox: Hurtbox) -> void:
 	if hurtbox.owner == owner:
 		return
 	hurtbox.take_damage(damage, get_knockback(), self)
-
+	print("I hit something")
 
 func get_knockback() -> Vector2:
 	var knockback: Vector2

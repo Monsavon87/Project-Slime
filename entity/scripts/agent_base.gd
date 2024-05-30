@@ -22,12 +22,12 @@ var dodge_dir: Vector2
 @onready var root: Node2D = $Root
 # Collision shape of the agent
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-# Particle effect for summoning the agent
-@onready var summoning_effect: GPUParticles2D = $FX/Summoned
+
 # Animation tree for controlling animations
 @onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 # Animation state within the animation tree
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var melee_weapon: Node2D = $MeleeWeapon
 
 # Called when the node is ready
 func _ready() -> void:
@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	# Connect the 'death' signal to the 'die' method
 	health.death.connect(die)
-
+	melee_weapon.visible = false
 # Process physics logic
 func _physics_process(_delta: float) -> void:
 	# Call the post-physics process method deferred
@@ -75,11 +75,11 @@ func move(p_velocity: Vector2) -> void:
 # Start the attack animation
 func attacking():
 	_is_attacking = true
-
+	melee_weapon.visible = true
 # Stop the attack animation
 func stop_attacking():
 	_is_attacking = false
-	
+	melee_weapon.visible = false
 # Check if the specified position is within the arena and not inside an obstacle
 func is_good_position(p_position: Vector2) -> bool:
 	var space_state := get_world_2d().direct_space_state
@@ -95,7 +95,7 @@ func _damaged(_amount: float, knockback: Vector2) -> void:
 	apply_knockback(knockback)
 	
 	# Play the hurt animation
-	animation_player.play(&"hurt")
+	#animation_player.play(&"hurt")
 	
 	# Disable other components during the hurt animation
 	var btplayer := get_node_or_null(^"BTPlayer") as BTPlayer
@@ -106,7 +106,7 @@ func _damaged(_amount: float, knockback: Vector2) -> void:
 		hsm.set_active(false)
 	
 	# Wait for the hurt animation to finish
-	await animation_player.animation_finished
+	#await animation_player.animation_finished
 	
 	# Restart components after the hurt animation finishes
 	if btplayer and not _is_dead:
@@ -120,7 +120,7 @@ func apply_knockback(knockback: Vector2, frames: int = 10) -> void:
 		return
 	for i in range(frames):
 		move
-		
+
 func die() -> void:
 	if _is_dead:
 		return

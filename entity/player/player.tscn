@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d3cslmx0huixq"]
+[gd_scene load_steps=26 format=3 uid="uid://d3cslmx0huixq"]
 
 [ext_resource type="PackedScene" uid="uid://bevjllmtq8hdr" path="res://entity/agent_base.tscn" id="1_kk54b"]
 [ext_resource type="Script" path="res://entity/player/player.gd" id="2_sse24"]
@@ -8,6 +8,11 @@
 [ext_resource type="Script" path="res://entity/player/states/move_state.gd" id="4_w5irs"]
 [ext_resource type="Script" path="res://entity/player/states/attack_state.gd" id="5_5m7tt"]
 [ext_resource type="Script" path="res://entity/player/states/dodge_state.gd" id="6_uqx5x"]
+[ext_resource type="PackedScene" uid="uid://dycmqmls5s86p" path="res://entity/melee/flame_melee.tscn" id="9_31r0e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xh0ra"]
+radius = 5.0
+height = 10.0
 
 [sub_resource type="Animation" id="Animation_jhx56"]
 length = 0.001
@@ -22,6 +27,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vfyj7"]
@@ -39,6 +56,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [28, 29, 30, 31, 28]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 10), Vector2(0, 10)]
+}
 
 [sub_resource type="Animation" id="Animation_tqloa"]
 resource_name = "attack_left"
@@ -54,6 +83,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [20, 21, 22, 23, 20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-16, -5), Vector2(-16, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_lirry"]
@@ -74,14 +115,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Root/body:flip_h")
+tracks/1/path = NodePath("MeleeWeapon:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, -5), Vector2(16, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_0kr7x"]
@@ -98,6 +139,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [16, 17, 18, 19, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -16)]
 }
 
 [sub_resource type="Animation" id="Animation_jn0kx"]
@@ -300,23 +353,24 @@ vframes = 16
 frame = 9
 
 [node name="Hurtbox" parent="Root" index="2" node_paths=PackedStringArray("health")]
-visible = false
-collision_layer = 0
-collision_mask = 56
+collision_layer = 2
+collision_mask = 0
 health = NodePath("../../Health")
 
 [node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
-visible = false
 position = Vector2(0, -5)
 
 [node name="Hitbox" parent="Root" index="3"]
-visible = false
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_xh0ra")
+disabled = true
+
+[node name="FX" parent="." index="1"]
 visible = false
-position = Vector2(0, -5)
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -3)
@@ -348,3 +402,5 @@ script = ExtResource("6_uqx5x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"dodge"
 hurtbox_collision = NodePath("../../Root/Hurtbox/CollisionShape2D")
+
+[node name="FlameMelee" parent="MeleeWeapon" index="0" instance=ExtResource("9_31r0e")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dycmqmls5s86p"]
+
+[ext_resource type="Script" path="res://entity/scripts/hitbox.gd" id="1_3plwl"]
+[ext_resource type="Texture2D" uid="uid://4s6n7susjrgd" path="res://assets/fireball.png" id="2_t11lu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixtcv"]
+radius = 9.0
+
+[node name="FlameMelee" type="Node2D"]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 24
+script = ExtResource("1_3plwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ixtcv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(0.23, 0.2)
+texture = ExtResource("2_t11lu")
+hframes = 3

@@ -12,6 +12,7 @@ var _can_enter: bool = true
 @onready var animation_state = animation_tree.get("parameters/playback")
 
 
+
 func can_enter() -> bool:
 	return _can_enter
 

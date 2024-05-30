@@ -53,6 +53,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_yxf5x"]
 resource_name = "idle_left"
 length = 0.8
+loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -255,18 +256,16 @@ vframes = 12
 frame = 1
 
 [node name="Hurtbox" parent="Root" index="2" node_paths=PackedStringArray("health")]
-visible = false
-collision_layer = 0
-collision_mask = 6
+collision_layer = 8
+collision_mask = 0
 health = NodePath("../../Health")
 
 [node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
 position = Vector2(0, -6)
 
 [node name="Hitbox" parent="Root" index="3"]
-visible = false
-collision_layer = 8
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
 position = Vector2(0, -6)
