@@ -12,8 +12,7 @@ extends LimboState
 ## Idle state.
 
 
-@export var animation_player: AnimationPlayer
-@export var idle_animation: StringName
+
 
 
 func _enter() -> void:

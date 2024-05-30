@@ -139,5 +139,9 @@ func die() -> void:
 		queue_free()
 
 
-func get_health() -> Health:
-	return health
+func get_health():
+	print(player_data.health)
+	#var health_node = $Health
+	#var health = health_node.get_current()
+	#return health
+	

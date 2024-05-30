@@ -248,8 +248,9 @@ script = ExtResource("1_ldmgw")
 
 [node name="body" type="Sprite2D" parent="Root"]
 
-[node name="Hurtbox" type="Area2D" parent="Root"]
+[node name="Hurtbox" type="Area2D" parent="Root" node_paths=PackedStringArray("health")]
 script = ExtResource("1_kj6h3")
+health = NodePath("../../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hurtbox"]
 shape = SubResource("CircleShape2D_nvvm6")

@@ -352,19 +352,21 @@ hframes = 4
 vframes = 16
 frame = 9
 
-[node name="Hurtbox" parent="Root" index="2" node_paths=PackedStringArray("health")]
+[node name="Hurtbox" parent="Root" index="2"]
+visible = false
 collision_layer = 2
 collision_mask = 0
-health = NodePath("../../Health")
 
 [node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
 position = Vector2(0, -5)
 
 [node name="Hitbox" parent="Root" index="3"]
+visible = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_xh0ra")
 disabled = true
@@ -383,10 +385,8 @@ libraries = {
 
 [node name="LimboHSM" type="LimboHSM" parent="." index="5"]
 
-[node name="IdleState" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("animation_player")]
+[node name="IdleState" type="LimboState" parent="LimboHSM" index="0"]
 script = ExtResource("3_sh6r5")
-animation_player = NodePath("../../AnimationPlayer")
-idle_animation = &"Idle"
 
 [node name="MoveState" type="LimboState" parent="LimboHSM" index="1" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_w5irs")
@@ -402,5 +402,8 @@ script = ExtResource("6_uqx5x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"dodge"
 hurtbox_collision = NodePath("../../Root/Hurtbox/CollisionShape2D")
+
+[node name="MeleeWeapon" parent="." index="7"]
+visible = false
 
 [node name="FlameMelee" parent="MeleeWeapon" index="0" instance=ExtResource("9_31r0e")]

@@ -34,6 +34,10 @@ func _process(_delta: float) -> void:
 	# Normaliser le vecteur
 	mouse_vector = direction_to_mouse.normalized()
 	
+	var health_node = $Health
+	var health = health_node.get_current()
+	player_data.health = health
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
@@ -42,7 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_attack_input()
 	if event.is_action_pressed("dodge"):
 		hsm.dispatch("dodge!")
-
+	if event.is_action_pressed("health"):
+		get_health()
 
 func _process_attack_input() -> void:
 	if not attack_pressed or hsm.get_active_state() == attack_state:
@@ -73,20 +78,20 @@ func _init_state_machine() -> void:
 	hsm.set_guard(_can_dodge)
 
 
-func _add_action(p_action: StringName, p_key: Key, p_alt: Key = KEY_NONE) -> void:
-	if not InputMap.has_action(p_action):
-		InputMap.add_action(p_action)
-		var event := InputEventKey.new()
-		event.keycode = p_key
-		InputMap.action_add_event(p_action, event)
-		if p_alt != KEY_NONE:
-			var alt := InputEventKey.new()
-			alt.keycode = p_alt
-			InputMap.action_add_event(p_action, alt)
+#func _add_action(p_action: StringName, p_key: Key, p_alt: Key = KEY_NONE) -> void:
+	#if not InputMap.has_action(p_action):
+		#InputMap.add_action(p_action)
+		#var event := InputEventKey.new()
+		#event.keycode = p_key
+		#InputMap.action_add_event(p_action, event)
+		#if p_alt != KEY_NONE:
+			#var alt := InputEventKey.new()
+			#alt.keycode = p_alt
+			#InputMap.action_add_event(p_action, alt)
 
 
-func set_victorious() -> void:
-	idle_state.idle_animation = &"dance"
+#func set_victorious() -> void:
+	#idle_state.idle_animation = &"dance"
 
 
 func _can_dodge() -> bool:
@@ -102,7 +107,7 @@ func orient(dir:Vector2) -> void:
 
 func disable():
 	input_enabled = false
-	animation_state.travel("idle")
+	animation_state.travel("Idle")
 
 func enable():
 	input_enabled = true
