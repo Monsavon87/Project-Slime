@@ -112,15 +112,17 @@ health={
 
 [layer_names]
 
-2d_physics/layer_1="Terrain"
+2d_physics/layer_1="TerrainCollision"
 2d_navigation/layer_1="Can walk"
-2d_physics/layer_2="Player"
+2d_physics/layer_2="PlayerCollision"
 2d_navigation/layer_2="cant walk"
-2d_physics/layer_3="PlayerProjectil"
-2d_physics/layer_4="Enemy"
-2d_physics/layer_5="EnemyProjectil"
-2d_physics/layer_6="Modifier"
-2d_physics/layer_7="Collectable"
+2d_physics/layer_3="PlayerHurtbox"
+2d_physics/layer_4="PlayerProjectil"
+2d_physics/layer_5="EnemyCollision"
+2d_physics/layer_6="EnemyHurtbox"
+2d_physics/layer_7="EnemyProjectil"
+2d_physics/layer_9="Modifier"
+2d_physics/layer_10="Collectable"
 
 [navigation]
 

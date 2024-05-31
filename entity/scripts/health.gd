@@ -34,3 +34,5 @@ func take_damage(amount: float, knockback: Vector2) -> void:
 ## Returns current health.
 func get_current() -> float:
 	return _current
+func get_max() -> float:
+	return max_health

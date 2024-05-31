@@ -334,7 +334,7 @@ _data = {
 [node name="Player" node_paths=PackedStringArray("sprite") groups=["Player", "player"] instance=ExtResource("1_kk54b")]
 z_index = 1
 collision_layer = 2
-collision_mask = 107
+collision_mask = 787
 script = ExtResource("2_sse24")
 input_enabled = true
 dodge_cooldown = 0.4
@@ -354,16 +354,14 @@ frame = 9
 
 [node name="Hurtbox" parent="Root" index="2"]
 visible = false
-collision_layer = 2
-collision_mask = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" parent="Root/Hurtbox" index="0"]
 position = Vector2(0, -5)
 
 [node name="Hitbox" parent="Root" index="3"]
 visible = false
-collision_layer = 0
-collision_mask = 0
+collision_mask = 96
 
 [node name="CollisionShape2D" parent="Root/Hitbox" index="0"]
 visible = false
@@ -382,6 +380,9 @@ rotation = 1.5708
 libraries = {
 "": SubResource("AnimationLibrary_py4j5")
 }
+
+[node name="Health" parent="." index="4"]
+max_health = 8.0
 
 [node name="LimboHSM" type="LimboHSM" parent="." index="5"]
 
@@ -407,3 +408,8 @@ hurtbox_collision = NodePath("../../Root/Hurtbox/CollisionShape2D")
 visible = false
 
 [node name="FlameMelee" parent="MeleeWeapon" index="0" instance=ExtResource("9_31r0e")]
+
+[node name="Hitbox" parent="MeleeWeapon/FlameMelee" index="0"]
+collision_mask = 32
+
+[editable path="MeleeWeapon/FlameMelee"]

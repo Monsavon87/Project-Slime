@@ -1,21 +1,25 @@
 [gd_scene load_steps=3 format=3 uid="uid://dybnrgi8el6ti"]
 
-[ext_resource type="Texture2D" uid="uid://cufg7jn2mco77" path="res://assets/Sprite/heart-small.png" id="1_7sk6n"]
 [ext_resource type="Script" path="res://Gameplay/GUI/hud.gd" id="1_t6wit"]
+[ext_resource type="Texture2D" uid="uid://ddquuq15ypsjn" path="res://assets/Ninja Adventure - Asset Pack/Ui/LifeReceptacle/heart.png" id="2_gjy84"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_t6wit")
 
 [node name="heartsContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 58.0
+offset_bottom = 58.0
 
 [node name="Panel" type="Panel" parent="heartsContainer"]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="heartsContainer/Panel"]
-texture = ExtResource("1_7sk6n")
-centered = false
+[node name="player_heart" type="Sprite2D" parent="heartsContainer/Panel"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_gjy84")
+hframes = 5
+frame = 4
 
 [node name="vie" type="Label" parent="."]
 offset_left = 4.0

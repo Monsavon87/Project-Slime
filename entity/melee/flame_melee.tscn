@@ -10,7 +10,7 @@ radius = 9.0
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 24
+collision_mask = 0
 script = ExtResource("1_3plwl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

@@ -23,6 +23,9 @@ func _ready() -> void:
 	can_dodge = true
 	_init_state_machine()
 	death.connect(func(): remove_from_group(&"player"))
+	var health_node = $Health
+	var health = health_node.get_max()
+	player_data.health = health
 
 func _process(_delta: float) -> void:
 	# Obtenir la position actuelle de la souris dans le monde

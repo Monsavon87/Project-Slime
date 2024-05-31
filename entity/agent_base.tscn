@@ -236,8 +236,8 @@ graph_offset = Vector2(-307.355, 0)
 
 [node name="Agent" type="CharacterBody2D"]
 y_sort_enabled = true
-collision_layer = 8
-collision_mask = 11
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0349066
 script = ExtResource("1_ldmgw")
@@ -249,6 +249,8 @@ script = ExtResource("1_ldmgw")
 [node name="body" type="Sprite2D" parent="Root"]
 
 [node name="Hurtbox" type="Area2D" parent="Root" node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_kj6h3")
 health = NodePath("../../Health")
 
@@ -257,6 +259,8 @@ shape = SubResource("CircleShape2D_nvvm6")
 debug_color = Color(0.668856, 0.508138, 0.112493, 0.42)
 
 [node name="Hitbox" type="Area2D" parent="Root"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_4vla8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hitbox"]
