@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bevjllmtq8hdr"]
+[gd_scene load_steps=63 format=3 uid="uid://bevjllmtq8hdr"]
 
 [ext_resource type="Script" path="res://entity/scripts/hurtbox.gd" id="1_kj6h3"]
 [ext_resource type="Script" path="res://entity/scripts/agent_base.gd" id="1_ldmgw"]
@@ -64,12 +64,16 @@ resource_name = "walk_right"
 [sub_resource type="Animation" id="Animation_pwwdc"]
 resource_name = "walk_up"
 
+[sub_resource type="Animation" id="Animation_c3asu"]
+resource_name = "death"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hxg0u"]
 _data = {
 "attack_down": SubResource("Animation_4v5h3"),
 "attack_left": SubResource("Animation_pephs"),
 "attack_right": SubResource("Animation_btwhq"),
 "attack_up": SubResource("Animation_gol8l"),
+"death": SubResource("Animation_c3asu"),
 "dodge_down": SubResource("Animation_c6s6r"),
 "dodge_left": SubResource("Animation_ean22"),
 "dodge_right": SubResource("Animation_n6x1r"),
@@ -200,6 +204,9 @@ nodes/Walk/position = Vector2(539, 156)
 nodes/output/position = Vector2(820, 160)
 node_connections = [&"output", 0, &"Walk"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6y22y"]
+animation = &"death"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7b0ow"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rsws0"]
@@ -231,6 +238,8 @@ states/Idle/node = SubResource("AnimationNodeBlendTree_84vw4")
 states/Idle/position = Vector2(354.645, 90)
 states/Walk/node = SubResource("AnimationNodeBlendTree_jcg6t")
 states/Walk/position = Vector2(611.645, 89)
+states/death/node = SubResource("AnimationNodeAnimation_6y22y")
+states/death/position = Vector2(782.645, 80)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7b0ow"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_rsws0"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jyb8c"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_ol4k8"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_hr4in"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_38fp4"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_tychk"), "Dodge", "Walk", SubResource("AnimationNodeStateMachineTransition_7f4kk"), "Walk", "Dodge", SubResource("AnimationNodeStateMachineTransition_626hq"), "Dodge", "Idle", SubResource("AnimationNodeStateMachineTransition_sda7h"), "Idle", "Dodge", SubResource("AnimationNodeStateMachineTransition_5t45x")]
 graph_offset = Vector2(-307.355, 0)
 

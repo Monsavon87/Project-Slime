@@ -21,7 +21,7 @@ extends BTAction
 @export var speed_var := &"speed"
 
 ## How close should the agent be to the target position to return SUCCESS.
-@export var tolerance := 50.0
+@export var tolerance := 20.0
 
 ## Specifies the node to avoid (valid Node2D is expected).
 ## If not empty, agent will circle around the node while moving into position.
@@ -40,7 +40,7 @@ func _tick(_delta: float) -> Status:
 	if target_pos.distance_to(agent.global_position) < tolerance:
 		return SUCCESS
 
-	var speed: float = blackboard.get_var(speed_var, 10.0)
+	var speed: float = blackboard.get_var(speed_var)
 	var dist: float = absf(agent.global_position.x - target_pos.x)
 	var dir: Vector2 = agent.global_position.direction_to(target_pos)
 

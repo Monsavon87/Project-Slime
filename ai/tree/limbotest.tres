@@ -12,6 +12,11 @@ var/speed/type = 3
 var/speed/value = 20.0
 var/speed/hint = 1
 var/speed/hint_string = "10,1000,10"
+var/pursue_factor/name = &"pursue_factor"
+var/pursue_factor/type = 3
+var/pursue_factor/value = 2.0
+var/pursue_factor/hint = 1
+var/pursue_factor/hint_string = "1, 3"
 
 [sub_resource type="BTAction" id="BTAction_jqp7p"]
 script = ExtResource("1_ucnwr")
@@ -31,6 +36,7 @@ target_var = &"target"
 script = ExtResource("3_1v0fr")
 target_var = &"target"
 speed_var = &"speed"
+speed_factor_var = null
 approach_distance = 0.0
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_r76jk"]

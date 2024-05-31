@@ -30,7 +30,7 @@ layer_0/tile_data = PackedInt32Array(1048605, 1507337, 0, 0, 393227, 13, 65536, 
 
 [node name="TowerDoor" parent="." instance=ExtResource("5_lysby")]
 position = Vector2(472, 254)
-collision_layer = 32
+collision_layer = 256
 collision_mask = 2
 entry_direction = 2
 transition_type = "fade_to_black"

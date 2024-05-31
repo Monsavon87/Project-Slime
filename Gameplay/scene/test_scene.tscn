@@ -43,7 +43,7 @@ layer_0/tile_data = PackedInt32Array(327688, 1900553, 4, 0, 458763, 13, 2, 45876
 
 [node name="ToHubDoor" parent="." instance=ExtResource("7_5cna1")]
 position = Vector2(136, 77)
-collision_layer = 32
+collision_layer = 256
 collision_mask = 2
 entry_direction = 2
 transition_type = "fade_to_white"

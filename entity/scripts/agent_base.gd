@@ -127,7 +127,8 @@ func die() -> void:
 	death.emit()
 	_is_dead = true
 	root.process_mode = Node.PROCESS_MODE_DISABLED
-	animation_player.play(&"death")
+	animation_tree.active = false
+	animation_player.play("death")
 	collision_shape_2d.set_deferred(&"disabled", true)
 
 	for child in get_children():
